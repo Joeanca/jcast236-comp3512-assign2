@@ -1,0 +1,139 @@
+
+.book_image{
+    height: 320px;
+}
+.drop-down{
+    overflow:initial;
+    z-index: 1000;
+    margin:0px;
+    margin-bottom: 8px;
+    width:100%;
+}
+.clear{
+    width:-webkit-fill-available ;
+}
+.profile{
+    padding: 8%;
+    max-width: -webkit-fill-available;
+    text-align: center;
+
+}
+.full-width{
+    width:100%;
+}
+.grow{
+    height:100%;
+}
+.grow { height: 100%;transition: all .2s ease-in-out; z-index: 0; }
+.grow:hover  { transform: scale(1.0); z-index: 1000; background-color:white; width: 100%;}
+
+.card:hover{
+    filter:drop-shadow(16px 16px 10px rgba(0,0,0,0.9)) saturate(130%);
+}
+#profile{
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+}
+.pull_up{
+
+    margin-top: -20px;
+}
+.double-row{
+    height:auto;
+}
+.demo-list-three {
+  width: 650px;
+}
+.pop-up, .contacto{
+     height: 100%;transition: all .2s ease-in-out; z-index: 0;
+}
+.pop-up:hover, .contacto:hover{
+    transform: scale(1.0); z-index: 1000; background-color:white;
+    filter:drop-shadow(16px 16px 10px rgba(0,0,0,0.9)) saturate(130%);
+}.pop-up{
+    width: 95%;
+}
+.hideMe{
+    visibility: hidden;
+}
+.imprints{
+    height: 413px !important;
+}
+.showed{
+    visibility: visible;
+}
+.single_book{
+  height: 420px;
+}
+/*.single_book:hover{*/
+/*    transform: scale(1.0); z-index: 1000; background-color:white; width: 100%; padding-top: 100%;*/
+/*    filter:drop-shadow(16px 16px 10px rgba(0,0,0,0.9)) saturate(130%);*/
+/*}*/
+.wrap-me{
+    word-wrap: break-word;
+}
+.img-container{
+    height: 244px;
+    overflow: hidden;
+    position:relative;
+
+}
+.dashboard-card{
+    width: 100%;
+    vertical-align: text-top;
+    position: absolute;
+    top:0px;
+    left:0px;
+
+}.noTextDecor{
+        text-decoration: none;
+    }.book-container{
+        position:relative;
+    }.button-book{
+        position:absolute;
+        bottom:0px;
+        left:0px;
+        height: auto;
+    }
+    
+    form {
+  padding: 20px;
+}
+@media screen and (max-width: 480px){
+    .card{
+        max-width: 100%;
+    }
+    header{
+        height:50px;
+        padding: 10px;
+    }
+    header nav{
+        margin: 0px;
+        margin-top: 10px;
+    }
+     header h1{
+        margin: 0px;
+        margin-top: 5px;
+    }.mdl-cell {
+        max-width: 97%;
+        height: auto;    
+      
+    } .book_image{
+      background-size: cover !important;
+    }.img-container{
+      padding:0px;  
+    }
+/*responsive layout formatting*/
+    
+    
+}@media screen and (min-width: 481px) and (max-width: 768px){
+    .cards{
+        justify-content: space-between;
+    }
+}
+@media screen and (min-width: 769px){
+    .cards{
+        justify-content: space-between;
+    }
+}
