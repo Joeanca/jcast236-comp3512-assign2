@@ -2,11 +2,7 @@
 <?php
 
 require_once('includes/config.php'); 
-include_once('includes/bookFunctions.inc.php');
-include("classes/AbstractTableGateway.class.php");
-include("classes/EmployeesGateway.class.php");
-include("classes/adapterFactory.class.php");
-
+include_once('includes/bookFunctions.inc.php')
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,8 +19,6 @@ include("classes/adapterFactory.class.php");
             
     <?php include 'includes/header.inc.php'; ?>
     <?php include 'includes/left-nav.inc.php'; ?>
-    
-    
     <main class="mdl-layout__content  mdl-color--grey-50 pull_up">
         <div class="mdl-grid">
             <div class="card mdl-grid mdl-cell--10-col ">
@@ -56,20 +50,6 @@ include("classes/adapterFactory.class.php");
                                 <li class='mdl-list__item'>COMP 3512 WEB II.</li>
                                 <li class='mdl-list__item'>October 9th 2018.</li>
                                 <li class='mdl-list__item'><a href="http://jorgecastano.com">Jorgecastano.com</a></li>
-                                <?php
-                                        $empDB = new EmployeesGateway();
-                                        $employees = $empDB->getAll();
-                                        if ( isset($_GET['id'])) {
-                                            $single = $empDB -> getById($_GET['id']);
-                                        }
-                                         else if ( isset($_GET['search'])) {
-                                             $employees = $empDB -> findByName($_GET['search']);
-                                         }
-                                         foreach ($employees as $emp){
-                                             $name = $emp;
-                                             echo "<li>$emp[LastName] $emp[FirstName]</li>";
-                                         }
-                                ?>
                                 
                             </ul>
                         </div>
