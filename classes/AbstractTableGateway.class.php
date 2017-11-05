@@ -16,7 +16,8 @@ include('includes/config.php');
         // pull the unique identifier for this object
         protected abstract function getKeyName();
         
-        // 
+        // To initialize and pass back and adapter
+        //  REMEMBER TO CLOSE IT AFTER USE!!! use $adapter = null;
         protected function createAdapter(){
             $dbType = "PDO";
             $connectionvalues = array(DBCONNSTRING,DBUSER,DBPASS);
@@ -24,13 +25,15 @@ include('includes/config.php');
             return $adapter;
         }
 
-       //To pull information using a query from db
+       //To pull information using a query set in the getAll method of your gateway from db
         public function getAll(){
             $adapter = $this->createAdapter();
             $results = $adapter->query($this->getSelectStatement());
             return $results;
             $adapter = null;
         }
+        
+        //  use to query a paramatered sql statemnt from your gateway without binding or query injection for values
         protected function getSpecific($sql){
             $adapter = $this->createAdapter();
             $statement=$adapter->prepare($sql);
@@ -42,12 +45,15 @@ include('includes/config.php');
             return $toReturn;
             $adapter = null;
         }
-        // 
+        // if you want to add a where statement with a default key set on your gateway implementation 
         public function getByKey($value){
             $adapter = $this->createAdapter();
             $sql = $this -> getSelectStatement()."where".$this->getKeyName()."=?";
             return $adapter -> query($sql, $value);
         }
+        
+        // Use this function from your gateway to pass in the sql, a key which is a column on a table, and the value you want to find in that column. 
+        //This will return an array of row objects which fields can be called as employee[column_name]
         protected function getWithKeyValue($sql,$key,$value){
             $adapter = $this->createAdapter();
             $sql = $sql." where ".$key." =:1 ";
