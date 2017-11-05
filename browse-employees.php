@@ -171,8 +171,8 @@ include_once('includes/employeeFunctions.inc.php');
                                   </thead>
                                   <tbody>
                                     <?php /*  display Messages  */ 
-                                            $contacts = getFromDB("select ContactID, FirstName, LastName from Contacts",'');
-                                            foreach ($emp as $mssg){
+                                            $contacts = $empDB->getContacts();
+                                            foreach ($empMessages as $mssg){
                                                         $time = strtotime( $mssg[MessageDate] );
                                                         $myDate = date( 'Y-M-d', $time );                           
                                                         $contact = getNeedle($contacts, $mssg[ContactID],ContactID);

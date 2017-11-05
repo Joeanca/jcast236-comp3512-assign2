@@ -23,6 +23,9 @@ class EmployeesGateway extends AbstractTableGateway {
     public function getMessages($id){
         return $this->GetWithKeyValue("select * from EmployeeMessages", "EmployeeID", $id);
     }
+    public function getContacts(){
+        return $this->getSpecific("select ContactID, FirstName, LastName from Contacts");
+    }
 
     
 }
