@@ -50,10 +50,10 @@ include_once('includes/bookFunctions.inc.php');
                                 
                                  <!--It should have your name, the course name and number, date, and anything else you’d like to put here.-->
                                  
-                                <li class='mdl-list__item'><h4>Jorge Castano</h4></li>
+                                <li class='mdl-list__item'><h4>Push it</h4></li>
                                 <li class='mdl-list__item'>COMP 3512 WEB II.</li>
-                                <li class='mdl-list__item'>October 9th 2018.</li>
-                                <li class='mdl-list__item'><a href="http://jorgecastano.com">Jorgecastano.com</a></li>
+                                <li class='mdl-list__item'>Some day 2018.</li>
+                                <li class='mdl-list__item'><a href="http://cdn3.vox-cdn.com/imported_assets/2388042/pPaPe_jpg.gif">Don'tClickMe.com</a></li>
                                 <?php
                                         $empDB = new EmployeesGateway();
                                         $employees = $empDB->getAll();
