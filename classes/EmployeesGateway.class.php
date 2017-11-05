@@ -7,7 +7,7 @@ class EmployeesGateway extends AbstractTableGateway {
     protected function getSelectStatement()   
     {    
         return "SELECT EmployeeID, FirstName, LastName, Address, City,                     
-        Region, Country, Postal, Email FROM Employees ";   
+        Region, Country, Postal, Email FROM Employees ORDER BY LastName, FirstName ASC";   
         
     }    
     protected function getOrderFields()    {
@@ -16,7 +16,7 @@ class EmployeesGateway extends AbstractTableGateway {
         
     }      
     protected function getKeyName() {
-        return "EmployeeID";    
+        return "id";    
         
     }   
 

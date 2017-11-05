@@ -3,7 +3,10 @@
 
 <?php
 require_once('includes/config.php'); 
-include_once('includes/employeeFunctions.inc.php')
+include_once('includes/employeeFunctions.inc.php');
+include("classes/AbstractTableGateway.class.php");
+include("classes/EmployeesGateway.class.php");
+include("classes/adapterFactory.class.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,14 +29,17 @@ include_once('includes/employeeFunctions.inc.php')
                 </div>
                 <div class="mdl-card__supporting-text">
                     <ul class="demo-list-item mdl-list">
+                        
+                        
                          <?php /* programmatically loop though employees and display each name as <li> element. */
                          
                                 /* THE * IN THE SELECT IS BECAUSE I ONLY USE ONE REQUEST AND USE ALL THE FIELDS AT A LATER END */
-                         
-                              $employeeList = getFromDB("select FirstName,EmployeeID,LastName,Address,City,Region,Country,Postal,Email	from Employees order by LastName",'');
-                              foreach ( $employeeList as $employee ){
+                                
+                                $empDB = new EmployeesGateway();
+                                        $employees = $empDB->getAll();
+                                foreach ( $employees as $emp ){
                          ?> 
-                               <li class='mdl-list__item'><?php echo constructGenreLink($employee[EmployeeID],$employee[FirstName]." ".$employee[LastName]); ?></li>
+                               <li class='mdl-list__item'><?php echo constructGenreLink($emp[EmployeeID],$emp[FirstName]." ".$emp[LastName]); ?></li>
                         <?php
                              }
                         ?>
@@ -59,10 +65,12 @@ include_once('includes/employeeFunctions.inc.php')
                               
                            <?php   
                              /* display requested employee's information */
+                            $empDB = new EmployeesGateway();
+                            $employees = $empDB->getAll();
                             if (isset($_GET[id]))$id= $_GET[id];
-                            foreach ($employeeList as $employee){
-                                if ($employee[EmployeeID] == $id){
-                                   $details = $employee;}
+                            foreach ($employees as $emp){
+                                if ($emp[EmployeeID] == $id){
+                                   $details = $emp;}
                             }
                             if (!empty($details)){
                                 

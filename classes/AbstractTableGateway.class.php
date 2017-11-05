@@ -20,7 +20,6 @@ include('includes/config.php');
 
        //To pull information using a query from db
         public function getAll(){
-            echo "im inside get all";
             $dbType = "PDO";
             $connectionvalues = array(DBCONNSTRING,DBUSER,DBPASS);
             $adapter = AdapterFactory::createAdapter($dbType, $connectionValues);
