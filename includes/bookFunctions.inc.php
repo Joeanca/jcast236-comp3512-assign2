@@ -64,7 +64,10 @@ function getBooks($c, $s, $i) {
 
 function getBySpecific($booklist, $c, $s, $i){
     $selected = array();
-    if ($s!="" && $i!=""){
+    if ($c=="" && $s=="" && $i==""){
+        return $booklist;
+    }
+    else if ($s!="" && $i!=""){
         foreach ($booklist as $book){
             if ($book[SubcategoryID] == $s && $book[ImprintID]== $i){
                 $selected[]=$book;
@@ -73,7 +76,7 @@ function getBySpecific($booklist, $c, $s, $i){
     }
     else if ($s!="" && $i==""){
         foreach ($booklist as $book){
-            if ($book[SubcategoryID] == $c){
+            if ($book[SubcategoryID] == $s){
                 $selected[]=$book;
             }
         }
