@@ -16,7 +16,10 @@ include_once('includes/employeeFunctions.inc.php');
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
             mdl-layout--fixed-header">
     <?php include 'includes/header.inc.php'; ?>
-    <?php include 'includes/left-nav.inc.php'; ?>
+    <?php include 'includes/left-nav.inc.php'; 
+    $empDB = new EmployeesGateway();
+    ?>
+    
         <main class="mdl-layout__content mdl-color--grey-50">
         <section class="page-content">
             <div class="mdl-grid">
@@ -34,7 +37,6 @@ include_once('includes/employeeFunctions.inc.php');
                     <label for="citySearch" class="mdl-textfield__label">City</label>
                         <ul for="citySearch" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
                             <?php
-                                $empDB = new EmployeesGateway();
                                 $employees = $empDB->getAll();
                                 foreach($employees as $emp){
                             ?>        
@@ -57,7 +59,6 @@ include_once('includes/employeeFunctions.inc.php');
                          
                                 /* THE * IN THE SELECT IS BECAUSE I ONLY USE ONE REQUEST AND USE ALL THE FIELDS AT A LATER END */
                                 
-                                $empDB = new EmployeesGateway();
                                         $employees = $empDB->getAll();
                                 foreach ( $employees as $emp ){
                          ?> 
@@ -87,7 +88,6 @@ include_once('includes/employeeFunctions.inc.php');
                               
                            <?php   
                              /* display requested employee's information */
-                            $empDB = new EmployeesGateway();
                             $employees = $empDB->getAll();
                             if (isset($_GET[id]))$id= $_GET[id];
                             foreach ($employees as $emp){
@@ -112,9 +112,11 @@ include_once('includes/employeeFunctions.inc.php');
                                     if none, display message to that effect */
                                     if (isSet($_GET[id])){
                                         $id = filter_var($_GET['id'], FILTER_SANITIZE_STRING);
-                                        $toDos = getFromDB("select * from EmployeeToDo where EmployeeID=:id order by DateBy", $id);
-                                    }else $toDos;
-                                    $isEmpty = empty($toDos);
+                                        $empToDo=$empDB->getToDo($id);
+                                        
+                                        //$toDos = getFromDB("select * from EmployeeToDo where EmployeeID=:id order by DateBy", $id);
+                                    }else $empToDo;
+                                    $isEmpty = empty($empToDo);
                                     if (!$isEmpty){
                                     //usort($toDos, "sortByDate");
                                ?>                                  
@@ -129,7 +131,7 @@ include_once('includes/employeeFunctions.inc.php');
                                   </thead>
                                   <tbody>
                                     <?php /*  display TODOs  */ 
-                                            foreach ($toDos as $toDo){
+                                            foreach ($empToDo as $toDo){
                                                         $time = strtotime( $toDo[DateBy] );
                                                         $myDate = date( 'Y-M-d', $time );                                                
                                                         echo "<tr>
@@ -152,9 +154,10 @@ include_once('includes/employeeFunctions.inc.php');
                                     if none, display message to that effect */
                                     if (isSet($_GET[id])){
                                         $id	= $_GET[id];
-                                        $mssgs = getFromDB("select * from	EmployeeMessages where EmployeeID= :id order by MessageDate", $id);
-                                    }else $mssgs;
-                                    $isEmpty = empty($mssgs);
+                                        $empMessages=$empDB->getMessages($id);
+                                        //$mssgs = getFromDB("select * from	EmployeeMessages where EmployeeID= :id order by MessageDate", $id);
+                                    }else $empMessages;
+                                    $isEmpty = empty($empMessages);
                                     if (!$isEmpty){
                                ?>                                  
                                 <table class="mdl-data-table  mdl-shadow--2dp">
@@ -169,7 +172,7 @@ include_once('includes/employeeFunctions.inc.php');
                                   <tbody>
                                     <?php /*  display Messages  */ 
                                             $contacts = getFromDB("select ContactID, FirstName, LastName from Contacts",'');
-                                            foreach ($mssgs as $mssg){
+                                            foreach ($emp as $mssg){
                                                         $time = strtotime( $mssg[MessageDate] );
                                                         $myDate = date( 'Y-M-d', $time );                           
                                                         $contact = getNeedle($contacts, $mssg[ContactID],ContactID);

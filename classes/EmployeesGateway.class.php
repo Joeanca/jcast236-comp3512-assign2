@@ -11,14 +11,18 @@ class EmployeesGateway extends AbstractTableGateway {
         
     }    
     protected function getOrderFields()    {
-        echo "inside employeegateway.getorderfields";
         return 'LastName, FirstName';   
-        
     }      
     protected function getKeyName() {
-        return "id";    
-        
+        return "EmployeeID";    
     }   
+    
+    public function getToDo($id){
+        return $this ->GetWithKeyValue("select * from EmployeeToDo", "EmployeeID", $id);
+    }
+    public function getMessages($id){
+        return $this->GetWithKeyValue("select * from EmployeeMessages", "EmployeeID", $id);
+    }
 
     
 }
