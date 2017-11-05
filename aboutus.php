@@ -3,9 +3,7 @@
 
 require_once('includes/config.php'); 
 include_once('includes/bookFunctions.inc.php');
-include("classes/AbstractTableGateway.class.php");
-include("classes/EmployeesGateway.class.php");
-include("classes/adapterFactory.class.php");
+
 
 ?>
 <!DOCTYPE html>
@@ -30,7 +28,7 @@ include("classes/adapterFactory.class.php");
             <div class="card mdl-grid mdl-cell--10-col ">
                 <div class="mdl-card mdl-cell--6-col mdl-grid--no-spacing unified ">
                     <div class="mdl-cell mdl-cell--12-col  mdl-grid--no-spacing">
-                           <img class ="profile" src="images/myAvatar.svg"  border="0"  alt="profile.jpg" style="padding:0px;">  
+                           <img class ="profile" src="images/smiling-owl.jpg"  border="0"  alt="profile.jpg" style="padding:0px;">  
 
 
                      </div>   

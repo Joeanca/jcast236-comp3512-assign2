@@ -1,6 +1,6 @@
   <div class="mdl-layout__drawer mdl-color--blue-grey-800 mdl-color-text--blue-grey-50">
        <div class="profile">
-           <img src="images/myAvatar.svg" class="avatar" id="profile">
+           <img src="images/smiling-owl.jpg" class="avatar" id="profile">
            <h4>Jorge Castano</h4>           
            <span>jcast236@mtroyal.ca</span>
        </div>

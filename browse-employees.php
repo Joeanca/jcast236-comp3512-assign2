@@ -4,9 +4,7 @@
 <?php
 require_once('includes/config.php'); 
 include_once('includes/employeeFunctions.inc.php');
-include("classes/AbstractTableGateway.class.php");
-include("classes/EmployeesGateway.class.php");
-include("classes/adapterFactory.class.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

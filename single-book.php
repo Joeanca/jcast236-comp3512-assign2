@@ -10,7 +10,10 @@ include_once('includes/bookFunctions.inc.php')
 
 <head>
     <title>Book Info</title>
-    <?php include "includes/importStatements.inc.php"; ?>
+<?php 
+    include "includes/importStatements.inc.php"; 
+    $bookInstance = new BooksGateway();
+?>
 </head>
 
 <body>
@@ -27,8 +30,7 @@ include_once('includes/bookFunctions.inc.php')
     
     //One of these will contain a list of authors for the book, sorted by the Order field. The other card will display a list of universities that have adopted the book
     if (isset($_GET[i10])){$i10 = $_GET[i10];}
-    $object = getFromDB("SELECT BookID, ISBN10, ISBN13, Title, CopyrightYear, TrimSize, PageCountsEditorialEst AS PageCount, Description, STATUS , SubcategoryName, Imprint, BindingType FROM Books
-JOIN Statuses ON ( Books.ProductionStatusID = Statuses.StatusID ) JOIN Subcategories ON ( Books.SubcategoryID = Subcategories.SubcategoryID ) JOIN Imprints USING ( ImprintID ) JOIN BindingTypes USING  (BindingTypeID) WHERE ISBN10 = '$i10'",''); 
+    $object = $bookInstance->getSingleBook($i10); 
     $book = $object[0];
     ?>
     <main class="mdl-layout__content  mdl-color--grey-50 pull_up">
@@ -60,7 +62,7 @@ JOIN Statuses ON ( Books.ProductionStatusID = Statuses.StatusID ) JOIN Subcatego
             </div>
         </div>
         <div class="mdl-cell--6-col  mdl-grid--no-spacing ">
-        <?php $authors=getFromDB("SELECT Authors.FirstName as FirstName, Authors.LastName as LastName, Authors.Institution as Institution FROM Books JOIN BookAuthors using (BookID) JOIN Authors using (AuthorID) WHERE BookID = $book[BookID]",''); ?>
+        <?php $authors=$bookInstance->getAuthors($book[BookID]); ?>
             <div class="mdl-cell mdl-card mdl-shadow--2dp mdl-cell--11-col double-row">
                 <div class="mdl-card__title "></div>
     
@@ -87,7 +89,7 @@ JOIN Statuses ON ( Books.ProductionStatusID = Statuses.StatusID ) JOIN Subcatego
             </div>
             <div class="mdl-cell mdl-card mdl-shadow--2dp mdl-cell--11-col double-row">
                 <!-- The other card will display a list of universities that have adopted the book. -->
-                <?php $adoptions=getFromDB("SELECT Universities.Name as Name, Adoptions.ContactID as ContactID, Adoptions.AdoptionDate as AdoptionDate, Contacts.FirstName as FirstName, Contacts.LastName as LastName, Contacts.Email as Email FROM Adoptions JOIN Universities using (UniversityID) JOIN AdoptionBooks using (AdoptionID) JOIN Contacts using (ContactID) WHERE AdoptionBooks.BookID =$book[BookID]",''); 
+                <?php $adoptions=$bookInstance-> getUniversities($book[BookID]); 
                     
                 
                 ?>
