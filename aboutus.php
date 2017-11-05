@@ -3,9 +3,7 @@
 
 require_once('includes/config.php'); 
 include_once('includes/bookFunctions.inc.php');
-include("classes/AbstractTableGateway.class.php");
-include("classes/EmployeesGateway.class.php");
-include("classes/adapterFactory.class.php");
+
 
 ?>
 <!DOCTYPE html>

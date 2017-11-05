@@ -62,6 +62,32 @@ function getBooks($c, $s, $i) {
    }
 }
 
+function getBySpecific($booklist, $c, $s, $i){
+    $selected = array();
+    if ($s!="" && $i!=""){
+        foreach ($booklist as $book){
+            if ($book[SubcategoryID] == $s && $book[ImprintID]== $i){
+                $selected[]=$book;
+            }
+        }
+    }
+    else if ($s!="" && $i==""){
+        foreach ($booklist as $book){
+            if ($book[SubcategoryID] == $c){
+                $selected[]=$book;
+            }
+        }
+    }
+    else if ($s=="" && $i!=""){
+        foreach ($booklist as $book){
+            if ($book[ImprintID] == $i){
+                $selected[]=$book;
+            }
+        }
+    }
+    return $selected;
+}
+
 
 // constructLink("cat", $subcategory[CategoryID], $subcategory[CategoryName] 
 function constructLink($id, $value, $label) {

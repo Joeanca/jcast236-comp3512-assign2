@@ -8,7 +8,9 @@ Initially, this page must display all the books in the books table. The user sho
 require_once('includes/config.php'); 
 include_once('includes/bookFunctions.inc.php');
 
- 
+
+
+
 ?>
 
 
@@ -17,7 +19,9 @@ include_once('includes/bookFunctions.inc.php');
 
 <head>
     <title>Books</title>
-    <?php include "includes/importStatements.inc.php"; ?>
+    <?php include "includes/importStatements.inc.php"; 
+    $bookInstance = new BooksGateway();
+?>
 </head>
 
 <body>
@@ -41,6 +45,7 @@ include_once('includes/bookFunctions.inc.php');
                         <div class="mdl-card__supporting-text">
                             <ul class="demo-list-item mdl-list">
                                    <?php
+                                    
                                         $publishers = getFromDB('select Imprint, ImprintID from Imprints Order by Imprint','');
                                         foreach ($publishers as $publisher){
                                             echo " <li class='mdl-list__item'>";
@@ -93,7 +98,8 @@ include_once('includes/bookFunctions.inc.php');
    }if (isset($_GET[imp])){
       $i = filter_var($_GET[imp], FILTER_SANITIZE_STRING);
    }
-                $bookList = getBooks($c,$s,$i);
+                $bookList = getBySpecific($bookInstance->getImprints(), $c, $s, $i);
+                //$bookList = getBooks($c,$s,$i);
                 foreach ($bookList as $book){
                 ?>
                 
