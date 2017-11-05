@@ -10,10 +10,27 @@ class BooksGateway extends AbstractTableGateway {
         return 'Subcategory';   
     }      
     protected function getKeyName() {
-        return "BookID";    
+        return "CategoryID";    
+    }
+    public function getBooks(){
+        return $this->getSpecific("select BookID, ISBN10, ISBN13, Title, CopyrightYear, SubcategoryID, ImprintID,  PageCountsEditorialEst, Description, CoverImage, Imprints.Imprint as Imprint, SubcategoryName from Books JOIN Imprints using (ImprintID) JOIN Subcategories using (SubcategoryID) order by Title");
     }
     public function getImprints(){
-        return $this->getSpecific("select BookID, ISBN10, ISBN13, Title, CopyrightYear, SubcategoryID, ImprintID,  PageCountsEditorialEst, Description, CoverImage, Imprints.Imprint as Imprint, SubcategoryName from Books JOIN Imprints using (ImprintID) JOIN Subcategories using (SubcategoryID) order by Title");
+        return $this->getSpecific('select Imprint, ImprintID from Imprints Order by Imprint');
+    }
+    
+    public function getSubcategories(){
+        return $this->getSpecific("select SubcategoryID, SubcategoryName from Subcategories order by SubcategoryName");
+    }
+    public function getSingleBook($i10){
+        return $this->getWithKeyValue("SELECT BookID, ISBN10, ISBN13, Title, CopyrightYear, TrimSize, PageCountsEditorialEst AS PageCount, Description, STATUS , SubcategoryName, Imprint, BindingType FROM Books
+            JOIN Statuses ON ( Books.ProductionStatusID = Statuses.StatusID ) JOIN Subcategories ON ( Books.SubcategoryID = Subcategories.SubcategoryID ) JOIN Imprints USING ( ImprintID ) JOIN BindingTypes USING  (BindingTypeID)", "ISBN10", $i10);
+    }
+    public function getAuthors($bID){
+        return $this->getWithKeyValue("SELECT Authors.FirstName as FirstName, Authors.LastName as LastName, Authors.Institution as Institution FROM Books JOIN BookAuthors using (BookID) JOIN Authors using (AuthorID)","BookID",$bID);
+    }
+    public function getUniversities($bID){
+         return $this->getWithKeyValue("SELECT Universities.Name as Name, Adoptions.ContactID as ContactID, Adoptions.AdoptionDate as AdoptionDate, Contacts.FirstName as FirstName, Contacts.LastName as LastName, Contacts.Email as Email FROM Adoptions JOIN Universities using (UniversityID) JOIN AdoptionBooks using (AdoptionID) JOIN Contacts using (ContactID)", "BookID",$bID);
     }
 }
 ?>

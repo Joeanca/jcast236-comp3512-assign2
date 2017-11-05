@@ -48,5 +48,18 @@ include('includes/config.php');
             $sql = $this -> getSelectStatement()."where".$this->getKeyName()."=?";
             return $adapter -> query($sql, $value);
         }
-    }
+        protected function getWithKeyValue($sql,$key,$value){
+            $adapter = $this->createAdapter();
+            $sql = $sql." where ".$key." =:1 ";
+            $statement=$adapter->prepare($sql);
+            $statement->bindParam(":1",$value);
+            $statement->execute();
+            $toReturn = array();
+			while	($row	=	$statement->fetch())	{
+					array_push($toReturn,$row);		      
+             }
+            return $toReturn;
+            $adapter = null;
+        }
+   }
 ?>

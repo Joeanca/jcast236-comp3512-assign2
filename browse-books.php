@@ -46,7 +46,7 @@ include_once('includes/bookFunctions.inc.php');
                             <ul class="demo-list-item mdl-list">
                                    <?php
                                     
-                                        $publishers = getFromDB('select Imprint, ImprintID from Imprints Order by Imprint','');
+                                        $publishers = $bookInstance->getImprints();
                                         foreach ($publishers as $publisher){
                                             echo " <li class='mdl-list__item'>";
                                             echo constructLink("imp",$publisher[ImprintID], $publisher[Imprint] );
@@ -69,10 +69,13 @@ include_once('includes/bookFunctions.inc.php');
                                 <?php  
                                    /* programmatically loop though employees and display each
                                       name as <li> element. */
+                                     $subcategories = $bookInstance->getSubcategories();
+                                     $subList=array();
                                     if (isset($_GET['cat'])){
                                         $c = filter_var($_GET[cat], FILTER_SANITIZE_STRING);
-                                       $subcategories = getFromDB("select SubcategoryID, SubcategoryName from Subcategories where CategoryID = :id order by SubcategoryName limit 20", $c);
-                                    } else $subcategories = getFromDB("select SubcategoryID, SubcategoryName from Subcategories Order by SubcategoryName limit 20",'');
+                                        foreach($subcategory as $sub){if ($sub[CategoryID]==$c)$subList[]=$sub;};
+                                    } 
+                                    else $subList=$subcategories;
                                     foreach ($subcategories as $subcategory){
                                     ?>
                                     <li class='mdl-list__item'><?php 
@@ -98,7 +101,7 @@ include_once('includes/bookFunctions.inc.php');
    }if (isset($_GET[imp])){
       $i = filter_var($_GET[imp], FILTER_SANITIZE_STRING);
    }
-                $bookList = getBySpecific($bookInstance->getImprints(), $c, $s, $i);
+                $bookList = getBySpecific($bookInstance->getBooks(), $c, $s, $i);
                 //$bookList = getBooks($c,$s,$i);
                 foreach ($bookList as $book){
                 ?>
