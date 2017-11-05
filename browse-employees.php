@@ -27,6 +27,30 @@ include("classes/adapterFactory.class.php");
                 <div class="mdl-card__title mdl-color--orange">
                   <h2 class="mdl-card__title-text">Employees</h2>
                 </div>
+                
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
+                    <input class="mdl-textfield__input" type="text" id="citySearch" value="Select City" readonly tabIndex="-1">
+                    <label for="citySearch">
+                        <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                    </label>
+                    <label for="citySearch" class="mdl-textfield__label">City</label>
+                        <ul for="citySearch" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                            <?php
+                                $empDB = new EmployeesGateway();
+                                $employees = $empDB->getAll();
+                                foreach($employees as $emp){
+                            ?>        
+                                }
+                                <li class="mdl-menu__item"><?php $emp['City']?></li>
+                            <?php
+                                }
+                            ?>
+                            <li class="mdl-menu__item" data-val="DE">Germany</li>
+                            <li class="mdl-menu__item" data-val="BY">Belarus</li>
+                            <li class="mdl-menu__item" data-val="RU">Russia</li>
+                        </ul>
+                </div>
+                
                 <div class="mdl-card__supporting-text">
                     <ul class="demo-list-item mdl-list">
                         
