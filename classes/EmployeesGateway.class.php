@@ -26,6 +26,12 @@ class EmployeesGateway extends AbstractTableGateway {
     public function getContacts(){
         return $this->getSpecific("select ContactID, FirstName, LastName from Contacts");
     }
+    public function getCities(){
+        return $this->getSpecific("Select Distinct City From Employees");
+    }
+    public function citySearch($id){
+        return $this->getWithKeyValue("Select FirstName, LastName FROM Employees", "city", $id);
+    }
 
     
 }

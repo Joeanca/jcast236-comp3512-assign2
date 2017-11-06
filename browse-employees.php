@@ -4,13 +4,18 @@
 <?php
 require_once('includes/config.php'); 
 include_once('includes/employeeFunctions.inc.php');
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Employees</title>
     <?php include "includes/importStatements.inc.php"; ?>
+    <script>
+        function showSearch(){
+            document.getElementById("searchDiv").style.display="inline";
+        }
+    </script>
+
 </head>
 <body>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
@@ -29,26 +34,45 @@ include_once('includes/employeeFunctions.inc.php');
                   <h2 class="mdl-card__title-text">Employees</h2>
                 </div>
                 
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
-                    <input class="mdl-textfield__input" type="text" id="citySearch" value="Select City" readonly tabIndex="-1">
-                    <label for="citySearch">
-                        <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
-                    </label>
-                    <label for="citySearch" class="mdl-textfield__label">City</label>
-                        <ul for="citySearch" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-                            <?php
-                                $employees = $empDB->getAll();
-                                foreach($employees as $emp){
-                            ?>        
-                                }
-                                <li class="mdl-menu__item"><?php $emp['City']?></li>
-                            <?php
+                <div class="mdl-cell mdl-cell--12-col card-lesson mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__title mdl-color--purple">
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="show" onclick="showSearch()">
+                            Show Employee Filters
+                        </button>
+                    </div>
+                    <form action ="https://assignment2-cbeau218.c9users.io/browse-employees.php" method="get">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <select class="mdl-textfield__input" id="city" name="city">
+                            <option></option>
+                             <?php
+                                $city = $empDB->getCities();
+                                foreach($city as $c){
+                                    echo '<option value="'. $c[0] . '">' . $c[0] . '</option>';
                                 }
                             ?>
-                            <li class="mdl-menu__item" data-val="DE">Germany</li>
-                            <li class="mdl-menu__item" data-val="BY">Belarus</li>
-                            <li class="mdl-menu__item" data-val="RU">Russia</li>
-                        </ul>
+                                
+                        </select>
+                        
+                    <label class="mdl-textfield__label" for="city">City</label>
+                    </div>
+                    
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                        <label class="mdl-button mdl-js-buttom mdl-button--icon" for="searchName">
+                            <i class="material-icons">search</i>
+                        </label>
+                        <div class="mdl-textfield__expandable-holder">
+                            <input class="mdl-textfield__input" type="text" name=lastname id="searchName"/>
+                            <label class="mdl-textfield__label" for"empSearch">Input Last Name</label>
+                        </div>
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="submit">Submit</button>
+                    </div>
+                    
+                    
+                    </form>
+
+                
                 </div>
                 
                 <div class="mdl-card__supporting-text">
@@ -56,10 +80,13 @@ include_once('includes/employeeFunctions.inc.php');
                         
                         
                          <?php /* programmatically loop though employees and display each name as <li> element. */
-                         
-                                /* THE * IN THE SELECT IS BECAUSE I ONLY USE ONE REQUEST AND USE ALL THE FIELDS AT A LATER END */
-                                
-                                        $employees = $empDB->getAll();
+                                if(isset($_GET['city'])){
+                                $id=$_GET['city'];
+                                $employees=$empDB->citySearch($id);
+                                }
+                                else{
+                                $employees = $empDB->getAll();
+                                }
                                 foreach ( $employees as $emp ){
                          ?> 
                                <li class='mdl-list__item'><?php echo constructGenreLink($emp[EmployeeID],$emp[FirstName]." ".$emp[LastName]); ?></li>

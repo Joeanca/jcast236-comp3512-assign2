@@ -31,6 +31,14 @@ function constructGenreLink($id, $label) {
 	$link	.=	'</a>';
 	return	$link;
 }
+
+function constructLink($qs,$id, $label) {
+	$link	=	'<a	href="?' . $qs . '=' .	$id	.	'">';
+	$link	.=	$label;
+	$link	.=	'</a>';
+	return	$link;
+}
+
 function getNeedle($array, $needle, $id){
     foreach ($array as $straw){
         if ($straw[ContactID] == $needle){
