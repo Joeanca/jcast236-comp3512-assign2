@@ -11,7 +11,11 @@ include_once('includes/universityFunctions.inc.php')
 
 <head>
     <title>Universities</title>
-    <?php include "includes/importStatements.inc.php"; ?>
+    <?php 
+        include "includes/importStatements.inc.php"; 
+        $universityInstance = new UniversitiesGateway();
+    
+    ?>
 </head>
 
 <body>
@@ -30,14 +34,15 @@ include_once('includes/universityFunctions.inc.php')
                 <div style="padding:20px; height:100%;">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height getmdl-select__fullwidth" style="width:100%">
                         <?php
-                        $states = getFromDB("Select StateId, StateName, StateAbbr from States","");
+                        /* Display current selected state, oherwise display message */
+                        $states= $universityInstance->getStatesSelect();
                         $listLabel;
                         $stateAbbr=$_GET[state];
                         if(isset($_GET[state])){ 
                             $object = getNeedle($states, $stateAbbr, StateAbbr);
                             $listLabel= $object[StateName];
-                        }else {$listLabel="Choose a state"
-                        ;}?>
+                        }else {$listLabel="Choose a state";}
+                        ?>
                         <input class="mdl-textfield__input" type="text" id="state" value="<?php echo $listLabel;?>" readonly tabIndex="-1" >
                         <label for="state">
                             <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
@@ -45,8 +50,7 @@ include_once('includes/universityFunctions.inc.php')
                         <label for="state" class="mdl-textfield__label">State</label>
                         <ul for="state" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
                             <?php  
-                           /* programmatically loop though employees and display each
-                              name as <li> element. */
+                           /* programmatically loop though states and display each name as a link. */
                               foreach ($states as $state){
                                   ?>
                                   <a href="?state=<?php echo $state[StateAbbr];?>">
@@ -72,12 +76,12 @@ include_once('includes/universityFunctions.inc.php')
                                         
                             <ul class="demo-list-item mdl-list">
                                  <?php  
-                                /* programmatically loop though employees and display each name as <li> element. */
+                                /* programmatically loop through universities and display each name as a link. */
                                 if (isset($_GET['state'])){
                                     $stateQueryVar = filter_var($_GET['state'], FILTER_SANITIZE_STRING);
                                     $currentState = getNeedle($states, $stateQueryVar, 'StateAbbr');
-                                    $universities = getFromDB("Select Name, Address, City, Zip, Website, UniversityID from Universities where State = :state order by Name limit 20", $currentState[StateName]);
-                                } else $universities =  getFromDB("Select Name, Address, City, Zip, Website, UniversityID from Universities order by Name limit 20",'');
+                                    $universities = $universityInstance->getSpecificUniversities($listLabel);
+                                } else {$universities= $universityInstance->getTopTwentyUniversities();} 
                                 foreach ($universities as $university){
                                 ?>
                                 <li class='mdl-list__item'><?php 
@@ -106,7 +110,7 @@ include_once('includes/universityFunctions.inc.php')
                         <ul class="demo-list-item mdl-list">
                               
                            <?php   
-                             /* display requested employee's information */
+                             /* display requested university information */
                             if (!empty($_GET[uid])){
                                 $university = getNeedle($universities, $_GET[uid], UniversityID );
                                 echo "<h3>$university[Name]</h3>

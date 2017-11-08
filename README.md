@@ -3,4 +3,4 @@
 Connor Beauchamp
 Catie Vickers  
 Jorge Castano
-Nicole...
+Nicole Waldern
