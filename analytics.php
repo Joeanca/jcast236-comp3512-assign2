@@ -5,14 +5,18 @@
 <?php
 
 require_once('includes/config.php'); 
-include_once('includes/bookFunctions.inc.php')
+include_once('includes/analytics.inc.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <title>About us</title>
-    <?php include "includes/importStatements.inc.php"; ?>
+    <?php include "includes/importStatements.inc.php"; 
+    echo analyticsJS();
+    $analyticsInstance = new AnalyticsGateway;
+?>
+
 </head>
 
 <body>
@@ -107,23 +111,64 @@ include_once('includes/bookFunctions.inc.php')
                             </div>
                         </div>
                     </div>
+                    <div class="mdl-cell mdl-cell--6-col mdl-cell--middle" style="backgroundColor">
+                        <div id="regions_div" style="width: 100%; height: auto;"></div>
+                    </div>
+                    <!--<div class="mdl-cell mdl-cell--6-col mdl-cell--top ">-->
+                    <!--<div class="mdl-grid mdl-grid--no-spacing">-->
+                    <?php 
+                     $bookList = $analyticsInstance->getTopTenBooks();
+                    foreach ($bookList as $book){
+                        ?>
+                
+                <!--The list should contain a thumbnail of the cover, the title, the year, subcategory name, and imprint name.-->
+                    <!-- Wide card with share menu button -->
+                 <div class='mdl-cell mdl-cell--3-col mdl-cell--12-col-phone'>
+                  <div class='book-container grow demo-card-square mdl-shadow--2dp card '>
+                <a href="./single-book.php?i10=<?php echo $book['ISBN10']?>">
+                <div class="mdl-card__title img-container" style="padding:0px;">
+                         <img class="dashboard-card" src="book-images/medium/<?php echo $book['ISBN10'] ?>.jpg" />
+                </div>
+                </a>
+                        <div class='mdl-card__supporting-text'>
+                         <h5 class='mdl-card__title-text'><?php echo $book['Title']?></h5>
+                        <div class="mdl-cell--bottom"><h6>
+                        <?php 
+                            // ISBN10, ISBN13, Title,  `BookID` , COUNT( * ) AS  `adopted`
+                            echo "Number of adoptions: $book[adopted]<br>";
+                            ?>
+                            </h6></div>
+                            <div class='mdl-card__supporting-text hideMe mdl-card__actions mdl-card--border'>
+                          <a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect'>
+                            See book details
+                          </a>
+                        </div>
+                        </div>
+                        <div class='mdl-card__supporting-text button-book mdl-card__actions mdl-card--border'>
+                          <a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href="./single-book.php?i10=<?php echo $book['ISBN10']?>">
+                            See book details
+                          </a>
+                        </div>
+              </div>            
+              </div>
+                <?php 
+                ;
+                }      ?>  
+                <!--</div>-->
+                <!--</div>-->
+
+
             </div>
+            
+
         </section>
     </main>
 </div>
+
 <div></div>
-<script>
-    $('.count').each(function () {
-    $(this).prop('Counter',0).animate({
-        Counter: $(this).text()
-    }, {
-        duration: 1000,
-        easing: 'swing',
-        step: function (now) {
-            $(this).text(Math.ceil(now));
-        }
-    });
-});
-</script>
+
+<?php
+echo counter();
+?>
 </body>
 </html>

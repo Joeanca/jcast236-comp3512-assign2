@@ -29,7 +29,5 @@ class UniversitiesGateway extends AbstractTableGateway {
     public function getTopTwentyUniversities(){
         return $this->getSpecific("select Name, Address, City, Zip, Website, UniversityID from Universities order by Name limit 20");
     }
-    
-    
 }
 ?>
