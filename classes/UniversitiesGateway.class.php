@@ -22,11 +22,14 @@ class UniversitiesGateway extends AbstractTableGateway {
     }
     
     public function getSpecificUniversities($state){
-        return $this->getSpecific("Select Name, Address, City, Zip, Website, UniversityID from Universities where State =".$state." order by Name limit 20");
+        
+        return $this->getWithKeyValue("Select Name, Address, City, Zip, Website, UniversityID from Universities ", State, $state);
     }
     
     public function getTopTwentyUniversities(){
         return $this->getSpecific("select Name, Address, City, Zip, Website, UniversityID from Universities order by Name limit 20");
     }
+    
+    
 }
 ?>

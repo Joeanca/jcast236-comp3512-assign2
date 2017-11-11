@@ -7,7 +7,6 @@ function getFromDB($sql,$state){
          $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS);
          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
          $sql = $sql;
-	   //   $sql	=	'select	*	from	Employees where	EmployeeID=:id';
 			$statement	=	$pdo->prepare($sql);
 			if ($state != ''){$statement->bindParam(':state', $state);}
 			$statement->execute();

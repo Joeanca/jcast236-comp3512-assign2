@@ -80,7 +80,7 @@ include_once('includes/universityFunctions.inc.php')
                                 if (isset($_GET['state'])){
                                     $stateQueryVar = filter_var($_GET['state'], FILTER_SANITIZE_STRING);
                                     $currentState = getNeedle($states, $stateQueryVar, 'StateAbbr');
-                                    $universities = $universityInstance->getSpecificUniversities($listLabel);
+                                    $universities = $universityInstance->getSpecificUniversities($currentState[StateName]);
                                 } else {$universities= $universityInstance->getTopTwentyUniversities();} 
                                 foreach ($universities as $university){
                                 ?>
