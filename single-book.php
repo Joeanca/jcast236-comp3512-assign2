@@ -19,7 +19,7 @@ include_once('includes/bookFunctions.inc.php')
 <body>
     
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
-            mdl-layout--fixed-header">
+            mdl-layout--fixed-header ">
             
     <?php include 'includes/header.inc.php'; ?>
     <?php include 'includes/left-nav.inc.php'; ?>
@@ -33,14 +33,19 @@ include_once('includes/bookFunctions.inc.php')
     $object = $bookInstance->getSingleBook($i10); 
     $book = $object[0];
     ?>
-    <main class="mdl-layout__content  mdl-color--grey-50 pull_up">
+    <main class="mdl-layout__content  mdl-color--grey-50 pull_up" >
         <div class="mdl-grid center">
+            
+
+        <div id="overlay" onclick="off()" ><img id="text" class="" src="book-images/medium/<?php echo $book['ISBN10'] ?>.jpg" style="opacity:1.0; height:60%;"/>
+        </div>
+               
         <div class="mdl-cell--6-col  mdl-grid--no-spacing center">
             <div class="mdl-cell mdl-card mdl-cell--11-col mdl-shadow--2dp">
                 <?php if ($book ==""){echo "No object found with ISBN10: $i10";}else {; ?>
                 
                 
-                <div class="mdl-card single_book" style="padding:0px;">
+                <div class="mdl-card single_book" onclick="on()" style="padding:0px;">
                          <img class="dashboard-card" src="book-images/medium/<?php echo $book['ISBN10'] ?>.jpg" />
                 </div>
                 <div class="mdl-card__supporting-text">
@@ -52,8 +57,8 @@ include_once('includes/bookFunctions.inc.php')
                     <p>ISBN10:&nbsp <?php echo $book[ISBN10]; ?></p>
                     <p>ISBN30:&nbsp <?php echo $book[ISBN13]; ?></p>
                     <p>Copyright Year:&nbsp <?php echo $book[CopyrightYear]; ?></p>
-                    <p>SubCategory:&nbsp <?php echo $book[SubcategoryName]; ?></p>
-                    <p>Imprint:&nbsp <?php echo $book[Imprint]; ?></p>
+                    <p>SubCategory:&nbsp <a href="/browse-books.php?scat=<?php echo $book[sID];?>"><?php echo $book[SubcategoryName]; ?></a></p>
+                    <p>Imprint:&nbsp <a href="/browse-books.php?imp=<?php echo $book[ImprintID];?>"><?php echo $book[Imprint]; ?></a></p>
                     <p>Production Status:&nbsp <?php echo $book[STATUS]; ?></p>
                     <p>Binding Type:&nbsp <?php echo $book[BindingType]; ?></p>
                     <p>Trim Size:&nbsp <?php echo $book[TrimSize]; ?></p>
@@ -122,9 +127,6 @@ include_once('includes/bookFunctions.inc.php')
             </div>
         </div>
     </main>
- 
-        
-  
 </div>
 <script>
     function animateMe($this){
@@ -137,6 +139,13 @@ include_once('includes/bookFunctions.inc.php')
             $($this).children().children(".showed").removeClass("showed").addClass("hideMe");
             $($this).children(".mdl-list__item-primary-content").css("height", "52px");
     }
+    function on() {
+    document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+    document.getElementById("overlay").style.display = "none";
+}
 </script> 
 </body>
 </html>
