@@ -26,80 +26,85 @@ include_once('includes/bookFunctions.inc.php')
         <section class="page-content">
             <div class="mdl-grid containerBackground">
               <!-- mdl-cell + mdl-card -->
-                    <div class="mdl-cell mdl-cell--3-col mdl-card mdl-grid--no-spacing">         
-                        <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
-                            <h5><i class="mdl-icon-toggle__label material-icons" style="color:white;">person pin</i></h5>
-                            <h5 class="mdl-card__title-text">June 2017 visits</h5>
-                        </div>
-                       
-                        <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-                            Non dolore elit adipisicing ea reprehenderit consectetur culpa.
+                    <div class="mdl-grid mdl-cell mdl-cell--3-col mdl-color--teal-300" >
+                        <div class="mdl-cell--12-col mdl-cell--top mdl-color-text--grey-50" style="height:auto;">Visits</div>
+                            <div class="mdl-cell--12-col">
+                                <div class="mdl-grid mdl-grid--no-spacing">
+                                    <div class="mdl-cell--4-col  mdl-cell--middle" style="text-align:center;">
+                                        <i class="mdl-icon-toggle__label material-icons mdl-color-text--grey-50" style="font-size: 2.5em;">person pin</i>
+                                    </div>
+                                    <div class="mdl-cell--8-col mdl-cell--middle">
+                                    <div class="mdl-grid mdl-grid--no-spacing">
+                                        <div class="mdl-cell--middle mdl-cell--12-col mdl-cell--middle mdl-color-text--grey-50" style="text-align:right;">
+                                            <h3><span class="count mdl-color-text--grey-50">1000</span></h3>
+                                        </div>
+                                        <div class="mdl-cell--middle mdl-cell--12-col mdl-cell--middle mdl-color-text--grey-50" style="text-align:right;">
+                                            20% up
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="mdl-grid mdl-cell mdl-cell--3-col">
-                       <div class="mdl-cell mdl-cell--4-col mdl-color--teal-300 mdl-card mdl-grid--no-spacing">
-                            <h5><i class="mdl-icon-toggle__label material-icons" style="color:white;">person pin</i></h5>
-                       </div>
-                       <div class="mdl-cell mdl-cell--6-col">
-                          <div class="mdl-grid mdl-grid--no-spacing">
-                              <div class="mdl-cell mdl-cell--12-col">
-                                  <div class="mdl-grid">
-                                      <div class="mdl-cell mdl-cell--6-col bg-sky">1</div>
-                                  </div>
-                                  <div class="mdl-grid">
-                                     <div class="mdl-cell mdl-cell--6-col bg-sky mdl-col--stretch" >3</div>
-                                 </div>
-                             </div>
-                          </div>
-                       </div>
-                    </div>
-                    <!--<div class="mdl-grid">-->
-                    <!--   <div class="mdl-cell mdl-cell--6-col bg-sky">-->
-                    <!--     image-->
-                    <!--   </div>-->
-                    <!--   <div class="mdl-cell mdl-cell--6-col">-->
-                    <!--      <div class="mdl-grid mdl-grid--no-spacing">-->
-                    <!--          <div class="mdl-cell mdl-cell--12-col">-->
-                    <!--              <div class="mdl-grid">-->
-                    <!--                  <div class="mdl-cell mdl-cell--6-col bg-sky">1</div>-->
-                    <!--              </div>-->
-                    <!--              <div class="mdl-grid">-->
-                    <!--                 <div class="mdl-cell mdl-cell--6-col bg-sky mdl-col--stretch" >3</div>-->
-                    <!--             </div>-->
-                    <!--         </div>-->
-                    <!--      </div>-->
-                    <!--   </div>-->
-                    <!--</div>-->
-
-
-                    <div class="mdl-cell mdl-cell--3-col card-lesson mdl-card mdl-grid">
-                        <div class="mdl-cell mdl-cell--4-col mdl-card__supporting-text" style="background:purple";>
-                            <h3> </h3>
+                                       <div class="mdl-grid mdl-cell mdl-cell--3-col mdl-color--grey-500" >
+                        <div class="mdl-cell--12-col mdl-cell--top mdl-color-text--grey-50" style="height:auto;">Visits</div>
+                            <div class="mdl-cell--12-col">
+                                <div class="mdl-grid mdl-grid--no-spacing">
+                                    <div class="mdl-cell--4-col  mdl-cell--middle" style="text-align:center;">
+                                        <i class="mdl-icon-toggle__label material-icons mdl-color-text--grey-50" style="font-size: 2.5em;">person pin</i>
+                                    </div>
+                                    <div class="mdl-cell--8-col mdl-cell--middle">
+                                    <div class="mdl-grid mdl-grid--no-spacing">
+                                        <div class="mdl-cell--middle mdl-cell--12-col mdl-cell--middle mdl-color-text--grey-50" style="text-align:right;">
+                                            <h3><span class="count mdl-color-text--grey-50">1000</span></h3>
+                                        </div>
+                                        <div class="mdl-cell--middle mdl-cell--12-col mdl-cell--middle mdl-color-text--grey-50" style="text-align:right;">
+                                            20% up
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mdl-cell mdl-cell--8-col mdl-card__supporting-text" style="background:white";>
-                            <h5 >Countries that visited</h5>
+                    </div>                    
+                    <div class="mdl-grid mdl-cell mdl-cell--3-col mdl-color--purple-300" >
+                        <div class="mdl-cell--12-col mdl-cell--top mdl-color-text--grey-50" style="height:auto;">Visits</div>
+                            <div class="mdl-cell--12-col">
+                                <div class="mdl-grid mdl-grid--no-spacing">
+                                    <div class="mdl-cell--4-col  mdl-cell--middle" style="text-align:center;">
+                                        <i class="mdl-icon-toggle__label material-icons mdl-color-text--grey-50" style="font-size: 2.5em;">person pin</i>
+                                    </div>
+                                    <div class="mdl-cell--8-col mdl-cell--middle">
+                                    <div class="mdl-grid mdl-grid--no-spacing">
+                                        <div class="mdl-cell--middle mdl-cell--12-col mdl-cell--middle mdl-color-text--grey-50" style="text-align:right;">
+                                            <h3><span class="count mdl-color-text--grey-50">1000</span></h3>
+                                        </div>
+                                        <div class="mdl-cell--middle mdl-cell--12-col mdl-cell--middle mdl-color-text--grey-50" style="text-align:right;">
+                                            20% up
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-
-
-                    <div class="mdl-cell mdl-cell--3-col card-lesson mdl-card mdl-grid">
-                        <div class="mdl-cell mdl-cell--4-col mdl-card__supporting-text" style="background:purple";>
-                            <h3> </h3>
-                        </div>
-                        <div class="mdl-cell mdl-cell--8-col mdl-card__supporting-text" style="background:white";>
-                            <h5>Employees to dos 2017 to date</h5>
-                        </div>
-                    </div>
-
-
-                    <div class="mdl-cell mdl-cell--3-col card-lesson mdl-card mdl-grid">
-                        <div class="mdl-cell mdl-cell--4-col mdl-card__supporting-text" style="background:purple";>
-                            <h3> </h3>
-                        </div>
-                        <div class="mdl-cell mdl-cell--8-col mdl-card__supporting-text" style="background:white";>
-                            <h5>Total number of employees</h5>
-                            
+                    </div>                    
+                    <div class="mdl-grid mdl-cell mdl-cell--3-col mdl-color--green-A200" >
+                        <div class="mdl-cell--12-col mdl-cell--top mdl-color-text--grey-50" style="height:auto;">Visits</div>
+                            <div class="mdl-cell--12-col">
+                                <div class="mdl-grid mdl-grid--no-spacing">
+                                    <div class="mdl-cell--4-col  mdl-cell--middle" style="text-align:center;">
+                                        <i class="mdl-icon-toggle__label material-icons mdl-color-text--grey-50" style="font-size: 2.5em;">person pin</i>
+                                    </div>
+                                    <div class="mdl-cell--8-col mdl-cell--middle">
+                                    <div class="mdl-grid mdl-grid--no-spacing">
+                                        <div class="mdl-cell--middle mdl-cell--12-col mdl-cell--middle mdl-color-text--grey-50" style="text-align:right;">
+                                            <h3><span class="count mdl-color-text--grey-50">1000</span></h3>
+                                        </div>
+                                        <div class="mdl-cell--middle mdl-cell--12-col mdl-cell--middle mdl-color-text--grey-50" style="text-align:right;">
+                                            20% up
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
             </div>
@@ -107,5 +112,18 @@ include_once('includes/bookFunctions.inc.php')
     </main>
 </div>
 <div></div>
+<script>
+    $('.count').each(function () {
+    $(this).prop('Counter',0).animate({
+        Counter: $(this).text()
+    }, {
+        duration: 1000,
+        easing: 'swing',
+        step: function (now) {
+            $(this).text(Math.ceil(now));
+        }
+    });
+});
+</script>
 </body>
 </html>

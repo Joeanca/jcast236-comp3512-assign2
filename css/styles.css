@@ -102,6 +102,9 @@
 }.containerBackground{
     background: #fafafa;
 }
+.textWhite{
+    color:white !important;
+}
 @media screen and (max-width: 480px){
     .card{
         max-width: 100%;
