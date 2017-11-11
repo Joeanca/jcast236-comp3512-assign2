@@ -99,6 +99,8 @@
     
     form {
   padding: 20px;
+}.containerBackground{
+    background: #fafafa;
 }
 @media screen and (max-width: 480px){
     .card{

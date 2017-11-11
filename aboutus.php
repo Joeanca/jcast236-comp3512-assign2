@@ -54,21 +54,6 @@ include_once('includes/bookFunctions.inc.php');
                                 <li class='mdl-list__item'>COMP 3512 WEB II.</li>
                                 <li class='mdl-list__item'>Some day 2018.</li>
                                 <li class='mdl-list__item'><a href="http://cdn3.vox-cdn.com/imported_assets/2388042/pPaPe_jpg.gif">Don'tClickMe.com</a></li>
-                                <?php
-                                        $empDB = new EmployeesGateway();
-                                        $employees = $empDB->getAll();
-                                        if ( isset($_GET['id'])) {
-                                            $single = $empDB -> getById($_GET['id']);
-                                        }
-                                         else if ( isset($_GET['search'])) {
-                                             $employees = $empDB -> findByName($_GET['search']);
-                                         }
-                                         foreach ($employees as $emp){
-                                             $name = $emp;
-                                             echo "<li>$emp[LastName] $emp[FirstName]</li>";
-                                         }
-                                ?>
-                                
                             </ul>
                         </div>
                         <div class="mdl-tabs__panel" id="resources-panel">
