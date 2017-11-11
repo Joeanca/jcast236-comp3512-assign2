@@ -30,7 +30,7 @@ class BooksGateway extends AbstractTableGateway {
         return $this->getWithKeyValue("SELECT Authors.FirstName as FirstName, Authors.LastName as LastName, Authors.Institution as Institution FROM Books JOIN BookAuthors using (BookID) JOIN Authors using (AuthorID)","BookID",$bID);
     }
     public function getUniversities($bID){
-         return $this->getWithKeyValue("SELECT Universities.Name as Name, Adoptions.ContactID as ContactID, Adoptions.AdoptionDate as AdoptionDate, Contacts.FirstName as FirstName, Contacts.LastName as LastName, Contacts.Email as Email FROM Adoptions JOIN Universities using (UniversityID) JOIN AdoptionBooks using (AdoptionID) JOIN Contacts using (ContactID)", "BookID",$bID);
+         return $this->getWithKeyValue("SELECT Universities.Name as Name, Universities.UniversityID as uid, Adoptions.ContactID as ContactID, Adoptions.AdoptionDate as AdoptionDate, Contacts.FirstName as FirstName, Contacts.LastName as LastName, Contacts.Email as Email FROM Adoptions JOIN Universities using (UniversityID) JOIN AdoptionBooks using (AdoptionID) JOIN Contacts using (ContactID)", "BookID",$bID);
     }
 }
 ?>

@@ -104,7 +104,7 @@ include_once('includes/bookFunctions.inc.php')
                          <li class="mdl-list__item mdl-list__item--three-line pop-up" onmouseenter="animateMe(this)" onmouseleave="backToNormal(this)">
                             <span class="mdl-list__item-primary-content">
                                   <i class="material-icons mdl-list__item-avatar">account_balance</i>
-                                  <div><span class="wrap-me"><?php echo "$adoption[Name]"; ?></span></div><br><br>
+                                  <div><span class="wrap-me"><a href="/browse-universities.php?uid=<?php echo "$adoption[uid]";?>"><?php echo "$adoption[Name]"; ?></a></span></div><br><br>
                                   <span class="mdl-list__item-text-body hideMe"><br>
                                        Book adoption date: <?php echo date( 'Y-M-d',strtotime( $adoption[AdoptionDate] )); ?><br>
                                        Contact Person: <?php echo "$adoption[FirstName] $adoption[LastName]"; ?><br>

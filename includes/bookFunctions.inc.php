@@ -28,15 +28,23 @@ function getBySpecific($booklist, $c, $s, $i){
     return $selected;
 }
 
+// redirect header 
+//Redirect('http://example.com/', false);
+function Redirect($url, $permanent = false)
+{
+    header('Location: ' . $url, true, $permanent ? 301 : 302);
+    exit();
+}
+
+
+
 
 // constructLink("cat", $subcategory[CategoryID], $subcategory[CategoryName] 
 function constructLink($id, $value, $label) {
     if ($id == 'cat'){
         $params['cat']=$value;
     }else{
-    
-    
-    $params = $_GET;
+        $params = $_GET;
     if (isset($params[$id])){
         $params[$id] = $value; 
     } else {

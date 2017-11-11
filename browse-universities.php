@@ -112,7 +112,8 @@ include_once('includes/universityFunctions.inc.php')
                            <?php   
                              /* display requested university information */
                             if (!empty($_GET[uid])){
-                                $university = getNeedle($universities, $_GET[uid], UniversityID );
+                                // $university = getNeedle($universities, $_GET[uid], UniversityID );
+                                $university = $universityInstance->getUniversityByUID($_GET[uid])[0];
                                 echo "<h3>$university[Name]</h3>
                                     <p>$university[Address]<br>
                                     $university[City], $university[State]
