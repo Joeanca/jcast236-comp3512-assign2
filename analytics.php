@@ -89,7 +89,7 @@ include_once('includes/analytics.inc.php');
                             </div>
                         </div>
                     </div>                    
-                    <div class="mdl-grid mdl-cell mdl-cell--3-col mdl-color--green-A200" >
+                    <div class="mdl-grid mdl-cell mdl-cell--3-col mdl-color--green-A700" >
                         <div class="mdl-cell--12-col mdl-cell--top mdl-color-text--grey-50" style="height:auto;">Employee messages sent </div>
                             <div class="mdl-cell--12-col">
                                 <div class="mdl-grid mdl-grid--no-spacing">
