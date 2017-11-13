@@ -126,6 +126,10 @@
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
 }
+
+.mdl-cell mdl-cell--12-col card-lesson mdl-card mdl-shadow--2dp{
+    display:none;
+}
 @media screen and (max-width: 480px){
     .card{
         max-width: 100%;
@@ -164,3 +168,9 @@
         justify-content: space-between;
     }
 }
+
+
+
+
+
+

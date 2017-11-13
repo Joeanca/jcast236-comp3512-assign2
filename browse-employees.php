@@ -10,14 +10,19 @@ include_once('includes/employeeFunctions.inc.php');
     <title>Employees</title>
     <?php 
     include "includes/importStatements.inc.php"; 
-    $employeeInstance = new EmployeesGateway();
+    $empDB = new EmployeesGateway();
 
     ?>
+     <script>
+        function showSearch(){
+            document.getElementById("searchDiv").style.display="inline";
+        }
+    </script>
 </head>
 <body>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
             mdl-layout--fixed-header">
-    <?php include 'includes/header.inc.php'; ?>
+     <?php include 'includes/header.inc.php'; ?>
     <?php include 'includes/left-nav.inc.php'; ?>
         <main class="mdl-layout__content mdl-color--grey-50">
         <section class="page-content">
@@ -27,16 +32,71 @@ include_once('includes/employeeFunctions.inc.php');
                 <div class="mdl-card__title mdl-color--orange">
                   <h2 class="mdl-card__title-text">Employees</h2>
                 </div>
+                
+                <div class="mdl-cell mdl-cell--12-col card-lesson mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__title mdl-color--purple">
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="show" onclick="showSearch()">
+                            Show Employee Filters
+                        </button>
+                    </div>
+                    <form action ="https://assignment2-cbeau218.c9users.io/browse-employees.php" method="get">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <select class="mdl-textfield__input" id="city" name="city">
+                            <option></option>
+                             <?php
+                                $city = $empDB->getCities();
+                                foreach($city as $c){
+                                    echo '<option value="'. $c[0] . '">' . $c[0] . '</option>';
+                                }
+                            ?>
+                                
+                        </select>
+                        
+                    <label class="mdl-textfield__label" for="city">City</label>
+                    </div>
+                    
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                        <label class="mdl-button mdl-js-buttom mdl-button--icon" for="searchName">
+                            <i class="material-icons">search</i>
+                        </label>
+                        <div class="mdl-textfield__expandable-holder">
+                            <input class="mdl-textfield__input" type="text" name=lastname id="searchName"/>
+                            <label class="mdl-textfield__label" for"empSearch">Input Last Name</label>
+                        </div>
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="submit">Submit</button>
+                    </div>
+                    
+                    
+                    </form>
+
+                
+                </div>
+                
                 <div class="mdl-card__supporting-text">
                     <ul class="demo-list-item mdl-list">
                          <?php 
-                         
                             if (isset($_POST['search'])){
-                                $employeeList = $employeeInstance->getByIncompleteName($_POST['search']);
+                                $employees = $empDB->getByIncompleteName($_POST['search']);
+                                usort($employees, function($a, $b) {
+                                    if($cmp = strnatcasecmp($a['LastName'], $b['LastName'])) return $cmp;
+                                    return strnatcasecmp($a['FirstName'], $b['FirstName']);
+                                });
                             }else{    
-                              $employeeList = getFromDB("select FirstName,EmployeeID,LastName,Address,City,Region,Country,Postal,Email	from Employees order by LastName",'');
+                               if(isset($_GET['city'])){
+                                    $id=$_GET['city'];
+                                    $employees=$empDB->citySearch($id);
+                                }
+                                else{
+                                    $employees = $empDB->getEverything();
+                                }
                             }
-                              foreach ( $employeeList as $employee ){
+                                 usort($employees, function($a, $b) {
+                                    if($cmp = strnatcasecmp($a['LastName'], $b['LastName'])) return $cmp;
+                                    return strnatcasecmp($a['FirstName'], $b['FirstName']);
+                                });
+                              foreach ( $employees as $employee ){
                          ?> 
                                <li class='mdl-list__item'><?php echo constructGenreLink($employee[EmployeeID],$employee[FirstName]." ".$employee[LastName]); ?></li>
                         <?php
@@ -64,11 +124,8 @@ include_once('includes/employeeFunctions.inc.php');
                               
                            <?php   
                              /* display requested employee's information */
-                            
-                            if (isset($_GET[id]))$id= $_GET[id];
-                            foreach ($employeeList as $employee){
-                                if ($employee[EmployeeID] == $id){
-                                   $details = $employee;}
+                            if (isset($_GET[id])){
+                                $details = $empDB->getEmployeeByID($_GET[id])[0];
                             }
                             if (!empty($details)){
                                 
@@ -86,11 +143,13 @@ include_once('includes/employeeFunctions.inc.php');
                                <?php                       
                                  /* retrieve for selected employee;
                                     if none, display message to that effect */
-                                    if (isSet($_GET[id])){
+                                    if (isset($_GET[id])){
                                         $id = filter_var($_GET['id'], FILTER_SANITIZE_STRING);
-                                        $toDos = getFromDB("select * from EmployeeToDo where EmployeeID=:id order by DateBy", $id);
-                                    }else $toDos;
-                                    $isEmpty = empty($toDos);
+                                        $empToDo=$empDB->getToDo($id);
+                                        
+                                        //$toDos = getFromDB("select * from EmployeeToDo where EmployeeID=:id order by DateBy", $id);
+                                    }else $empToDo;
+                                    $isEmpty = empty($empToDo);
                                     if (!$isEmpty){
                                     //usort($toDos, "sortByDate");
                                ?>                                  
@@ -105,7 +164,7 @@ include_once('includes/employeeFunctions.inc.php');
                                   </thead>
                                   <tbody>
                                     <?php /*  display TODOs  */ 
-                                            foreach ($toDos as $toDo){
+                                            foreach ($empToDo as $toDo){
                                                         $time = strtotime( $toDo[DateBy] );
                                                         $myDate = date( 'Y-M-d', $time );                                                
                                                         echo "<tr>
@@ -128,9 +187,10 @@ include_once('includes/employeeFunctions.inc.php');
                                     if none, display message to that effect */
                                     if (isSet($_GET[id])){
                                         $id	= $_GET[id];
-                                        $mssgs = getFromDB("select * from	EmployeeMessages where EmployeeID= :id order by MessageDate", $id);
-                                    }else $mssgs;
-                                    $isEmpty = empty($mssgs);
+                                        $empMessages=$empDB->getMessages($id);
+                                        //$mssgs = getFromDB("select * from	EmployeeMessages where EmployeeID= :id order by MessageDate", $id);
+                                    }else $empMessages;
+                                    $isEmpty = empty($empMessages);
                                     if (!$isEmpty){
                                ?>                                  
                                 <table class="mdl-data-table  mdl-shadow--2dp">
@@ -144,8 +204,8 @@ include_once('includes/employeeFunctions.inc.php');
                                   </thead>
                                   <tbody>
                                     <?php /*  display Messages  */ 
-                                            $contacts = getFromDB("select ContactID, FirstName, LastName from Contacts",'');
-                                            foreach ($mssgs as $mssg){
+                                            $contacts = $empDB->getContacts();
+                                            foreach ($empMessages as $mssg){
                                                         $time = strtotime( $mssg[MessageDate] );
                                                         $myDate = date( 'Y-M-d', $time );                           
                                                         $contact = getNeedle($contacts, $mssg[ContactID],ContactID);

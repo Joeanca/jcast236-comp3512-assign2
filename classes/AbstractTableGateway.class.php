@@ -16,9 +16,8 @@ include('includes/config.php');
         // pull the unique identifier for this object
         protected abstract function getKeyName();
         
-        // To initialize and pass back and adapter
-        //  REMEMBER TO CLOSE IT AFTER USE!!! use $adapter = null;
         protected function createAdapter(){
+
             $dbType = "PDO";
             $connectionvalues = array(DBCONNSTRING,DBUSER,DBPASS);
             $adapter = AdapterFactory::createAdapter($dbType, $connectionValues);
@@ -69,18 +68,16 @@ include('includes/config.php');
         }
         protected function getWithWildCards($sql,$keyArray,$valueArray){
             $adapter = $this->createAdapter();
-            for ($x = 0; $x <= 10; $x++) {
-                 echo "The number is: $x <br>";
-            }
-            for ($i = 0; $i < $keyArray; $i++){
-                $sql = $sql." where ".$key[$i]." LIKE :$i ";
-                if ($i< ($keyArray.length -1)){
-                    $sql.=" OR ";
+            for ($i = 0; $i < count($keyArray); $i++){
+                if ($i == 0){
+                    $sql = $sql." where ".$keyArray[$i]." LIKE :$i ";
+                }else {
+                    $sql.=" OR ".$keyArray[$i]." LIKE :$i ";
                 }
             }
             $statement=$adapter->prepare($sql);
-            for ($i=0; $i<$keyArray; $i++){
-                $statement->bindParam(":$i",$value[$i]);
+            for ($i=0; $i<count($valueArray); $i++){
+                $statement->bindParam(":$i",$valueArray[$i]);
             }
             $statement->execute();
             $toReturn = array();
