@@ -22,6 +22,8 @@ include('includes/config.php');
             $connectionvalues = array(DBCONNSTRING,DBUSER,DBPASS);
             $adapter = AdapterFactory::createAdapter($dbType, $connectionValues);
             return $adapter;
+            $adapter = null;
+
         }
 
        //To pull information using a query set in the getAll method of your gateway from db
@@ -49,6 +51,8 @@ include('includes/config.php');
             $adapter = $this->createAdapter();
             $sql = $this -> getSelectStatement()."where".$this->getKeyName()."=?";
             return $adapter -> query($sql, $value);
+            $adapter = null;
+
         }
         
         // Use this function from your gateway to pass in the sql, a key which is a column on a table, and the value you want to find in that column. 
