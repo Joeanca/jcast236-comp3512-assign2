@@ -13,9 +13,15 @@ include_once('includes/employeeFunctions.inc.php');
     $empDB = new EmployeesGateway();
 
     ?>
+
      <script>
         function showSearch(){
-            document.getElementById("searchDiv").style.display="inline";
+            if(document.getElementById("searchDiv").style.display=="none"){
+                document.getElementById("searchDiv").style.display="inline";
+            }
+            else{
+                document.getElementById("searchDiv").style.display="none";
+            }
         }
     </script>
 </head>
@@ -27,20 +33,22 @@ include_once('includes/employeeFunctions.inc.php');
         <main class="mdl-layout__content mdl-color--grey-50">
         <section class="page-content">
             <div class="mdl-grid">
+                
               <!-- mdl-cell + mdl-card -->
               <div class="mdl-cell mdl-cell--3-col card-lesson mdl-card  mdl-shadow--2dp">
                 <div class="mdl-card__title mdl-color--orange">
                   <h2 class="mdl-card__title-text">Employees</h2>
                 </div>
                 
-                <div class="mdl-cell mdl-cell--12-col card-lesson mdl-card mdl-shadow--2dp">
-                    <div class="mdl-card__title mdl-color--purple">
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="show" onclick="showSearch()">
+                
+                
+                    <div class="mdl-card__title mdl-color--blue-grey">
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="showSearch()">
                             Show Employee Filters
                         </button>
                     </div>
-                    <form action ="/browse-employees.php" method="get">
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <form action ="/browse-employees.php" method="get" id="searchDiv" style="display:none">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" >
                         <select class="mdl-textfield__input" id="city" name="city">
                             <option></option>
                              <?php
@@ -72,7 +80,7 @@ include_once('includes/employeeFunctions.inc.php');
                     </form>
 
                 
-                </div>
+                
                 
                 <div class="mdl-card__supporting-text">
                     <ul class="demo-list-item mdl-list">
@@ -84,9 +92,18 @@ include_once('includes/employeeFunctions.inc.php');
                                     return strnatcasecmp($a['FirstName'], $b['FirstName']);
                                 });
                             }else{    
-                               if(isset($_GET['city'])){
+                               if(isset($_GET['city']) && empty($_GET['lastname'])){
                                     $id=$_GET['city'];
                                     $employees=$empDB->citySearch($id);
+                                }
+                                else if(isset($_GET['lastname']) && empty($_GET['city'])){
+                                    $id=$_GET['lastname'];
+                                    $employees=$empDB->getByIncompleteName($id);
+                                }
+                                else if(isset($_GET['lastname']) && isset($_GET['city'])){
+                                    $city=$_GET['city'];
+                                    $lastName=$_GET['lastname'];
+                                    $employees=$empDB->cityAndLastNameSearch($city,$lastName);
                                 }
                                 else{
                                     $employees = $empDB->getEverything();
