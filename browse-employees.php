@@ -1,17 +1,16 @@
-<!--There must be a page named browse-employees.php. It must display a list of employees from the Employees table (sorted by last name) as a list of links. Each employee name will be a link back to the same browse-employees.php page but with a query string parameter containing the employee id. When the page receives a request with this id, then display a separate MDL card containing a set of tabs: a tab group containing the address information for employee, a tab group containing the employee to-do list in a table, and a tab group for employee messages also contained in a table. This is essentially an expanded version of Chapter 14, Project 1. In the employee messages tab, display a table including the date, category, from (contact first name and last name) and the first 40 characters of the message.-->
-
 <?php
 require_once('includes/config.php'); 
 include_once('includes/employeeFunctions.inc.php');
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <title>Employees</title>
     <?php 
-    include "includes/importStatements.inc.php"; 
-    $empDB = new EmployeesGateway();
-
+        include "includes/importStatements.inc.php"; 
+        $empDB = new EmployeesGateway();
     ?>
 
      <script>
@@ -25,6 +24,7 @@ include_once('includes/employeeFunctions.inc.php');
         }
     </script>
 </head>
+
 <body>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
             mdl-layout--fixed-header">
