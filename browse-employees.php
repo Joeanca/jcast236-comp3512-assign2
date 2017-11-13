@@ -39,7 +39,7 @@ include_once('includes/employeeFunctions.inc.php');
                             Show Employee Filters
                         </button>
                     </div>
-                    <form action ="https://assignment2-cbeau218.c9users.io/browse-employees.php" method="get">
+                    <form action ="/browse-employees.php" method="get">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                         <select class="mdl-textfield__input" id="city" name="city">
                             <option></option>
