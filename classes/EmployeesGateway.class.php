@@ -17,9 +17,10 @@ class EmployeesGateway extends AbstractTableGateway {
     }      
     protected function getKeyName() {
         return "EmployeeID";    
-        
-    }   
-
-    
+    } 
+    public function getByIncompleteName($string){
+        $string = "%".$string."%";
+        return $this->getWithWildCards("select FirstName,EmployeeID,LastName,Address,City,Region,Country,Postal,Email from Employees", array("FirstName", "LastName"), array($string, $string));
+    }
 }
 ?>

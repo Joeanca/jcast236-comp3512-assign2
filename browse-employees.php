@@ -1,15 +1,18 @@
 <!--There must be a page named browse-employees.php. It must display a list of employees from the Employees table (sorted by last name) as a list of links. Each employee name will be a link back to the same browse-employees.php page but with a query string parameter containing the employee id. When the page receives a request with this id, then display a separate MDL card containing a set of tabs: a tab group containing the address information for employee, a tab group containing the employee to-do list in a table, and a tab group for employee messages also contained in a table. This is essentially an expanded version of Chapter 14, Project 1. In the employee messages tab, display a table including the date, category, from (contact first name and last name) and the first 40 characters of the message.-->
 
-
 <?php
 require_once('includes/config.php'); 
-include_once('includes/employeeFunctions.inc.php')
+include_once('includes/employeeFunctions.inc.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Employees</title>
-    <?php include "includes/importStatements.inc.php"; ?>
+    <?php 
+    include "includes/importStatements.inc.php"; 
+    $employeeInstance = new EmployeesGateway();
+
+    ?>
 </head>
 <body>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
@@ -26,11 +29,13 @@ include_once('includes/employeeFunctions.inc.php')
                 </div>
                 <div class="mdl-card__supporting-text">
                     <ul class="demo-list-item mdl-list">
-                         <?php /* programmatically loop though employees and display each name as <li> element. */
+                         <?php 
                          
-                                /* THE * IN THE SELECT IS BECAUSE I ONLY USE ONE REQUEST AND USE ALL THE FIELDS AT A LATER END */
-                         
+                            if (isset($_POST['search'])){
+                                $employeeList = $employeeInstance->getByIncompleteName($_POST['search']);
+                            }else{    
                               $employeeList = getFromDB("select FirstName,EmployeeID,LastName,Address,City,Region,Country,Postal,Email	from Employees order by LastName",'');
+                            }
                               foreach ( $employeeList as $employee ){
                          ?> 
                                <li class='mdl-list__item'><?php echo constructGenreLink($employee[EmployeeID],$employee[FirstName]." ".$employee[LastName]); ?></li>
@@ -59,6 +64,7 @@ include_once('includes/employeeFunctions.inc.php')
                               
                            <?php   
                              /* display requested employee's information */
+                            
                             if (isset($_GET[id]))$id= $_GET[id];
                             foreach ($employeeList as $employee){
                                 if ($employee[EmployeeID] == $id){

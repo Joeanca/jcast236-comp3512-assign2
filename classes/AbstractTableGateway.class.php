@@ -67,5 +67,28 @@ include('includes/config.php');
             return $toReturn;
             $adapter = null;
         }
+        protected function getWithWildCards($sql,$keyArray,$valueArray){
+            $adapter = $this->createAdapter();
+            for ($x = 0; $x <= 10; $x++) {
+                 echo "The number is: $x <br>";
+            }
+            for ($i = 0; $i < $keyArray; $i++){
+                $sql = $sql." where ".$key[$i]." LIKE :$i ";
+                if ($i< ($keyArray.length -1)){
+                    $sql.=" OR ";
+                }
+            }
+            $statement=$adapter->prepare($sql);
+            for ($i=0; $i<$keyArray; $i++){
+                $statement->bindParam(":$i",$value[$i]);
+            }
+            $statement->execute();
+            $toReturn = array();
+			while	($row	=	$statement->fetch())	{
+					array_push($toReturn,$row);		      
+             }
+            return $toReturn;
+            $adapter = null;
+        }
    }
 ?>
