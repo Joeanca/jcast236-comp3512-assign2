@@ -91,5 +91,6 @@ include('includes/config.php');
             return $toReturn;
             $adapter = null;
         }
+        
    }
 ?>

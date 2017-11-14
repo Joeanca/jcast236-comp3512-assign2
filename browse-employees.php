@@ -23,6 +23,7 @@ include_once('includes/employeeFunctions.inc.php');
             }
         }
     </script>
+    
 </head>
 
 <body>
