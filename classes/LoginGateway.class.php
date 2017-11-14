@@ -16,12 +16,20 @@ class LoginGateway extends AbstractTableGateway {
     
     public function validate($userName, $password){
         
+        //K so, first thing you want to do is get the salt from the username that logged in
+        
         $temp = $this->getWithKeyValue("Select Salt FROM UsersLogin", "UserName", $userName);
-        $salt = $temp['Salt'];
+         //I was having issues getting the salt array from the query into a variable but jorge says this shold fix it
+        $salt = $temp[0]['Salt'];
+       
+        //this query will work if the correct salt is selected and that variable isn't empty.
+        //instead of returning, should put in a variable. If variable isn't empty, return true, if empty, return false
+        //Then in previous function you can do the if else. 
+        
         return $this ->getSpecific("Select UserID FROM UserLogin WHERE UserName = '" . $userName . "' AND Password =MD5( '" . $password . $salt . "')");
 
         
-        //Not sure if this is even close to working or is even safe but the Password=MD5 part is correct. If the user enters abcd1234 and you concat the salt you will get the right info
+        
     }
     
       

@@ -25,6 +25,8 @@
             <?php
                 if(isset($_POST['username']) && isset($_POST['password']))
                 {
+                    
+                    //If submit has data, send username and password over to validateUser in loginFunctions.inc.php
                     $username = $_POST['username'];
                     $password = $_POST['password'];
                     validateUser($userID,$password);
