@@ -28,7 +28,7 @@ include_once('includes/bookFunctions.inc.php');
             <div class="card mdl-grid mdl-cell--10-col ">
                 <div class="mdl-card mdl-cell--6-col mdl-grid--no-spacing unified ">
                     <div class="mdl-cell mdl-cell--12-col  mdl-grid--no-spacing">
-                           <img class ="profile" src="images/smiling-owl.jpg"  border="0"  alt="profile.jpg" style="padding:0px;">  
+                           <img class ="profile" src="http://www.woori.ca/wp-content/uploads/2016/05/Mount-Royal-University-Logo.png"  border="0"  alt="profile.jpg" style="padding:0px;">  
 
 
                      </div>   
@@ -50,10 +50,15 @@ include_once('includes/bookFunctions.inc.php');
                                 
                                  <!--It should have your name, the course name and number, date, and anything else you’d like to put here.-->
                                  
-                                <li class='mdl-list__item'><h4>Push it</h4></li>
-                                <li class='mdl-list__item'>COMP 3512 WEB II.</li>
-                                <li class='mdl-list__item'>Some day 2018.</li>
-                                <li class='mdl-list__item'><a href="http://cdn3.vox-cdn.com/imported_assets/2388042/pPaPe_jpg.gif">Don'tClickMe.com</a></li>
+                                <li class='mdl-list__item'><h4>COMP 3512 Assignment #2</h4></li>
+                                <li class='mdl-list__item'>This is a hypothetical website created for the assignment</li>
+                                <li class='mdl-list__item'>Mount Royal University</li>
+                                <li class='mdl-list__item'>November 18, 2017</li>
+                                <li class='mdl-list__item'>Group work: Initial planning, Gateway classes</li>
+                                <li class='mdl-list__item'>Catie: Login?</li>
+                                <li class='mdl-list__item'>Connor: Browse Employees</li>
+                                <li class='mdl-list__item'>Jorge: Books, Analytics</li>
+                                <li class='mdl-list__item'>Nicole: Browse Universities </li>
                             </ul>
                         </div>
                         <div class="mdl-tabs__panel" id="resources-panel">
