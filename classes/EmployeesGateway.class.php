@@ -1,4 +1,4 @@
-<?php
+<<?php
 class EmployeesGateway extends AbstractTableGateway {    
     public function __construct()    {
         parent::__construct();   
