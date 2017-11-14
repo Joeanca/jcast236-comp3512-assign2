@@ -24,7 +24,6 @@ class EmployeesGateway extends AbstractTableGateway {
         return $this->getSpecific("SELECT EmployeeID, FirstName, LastName, Address, City,                     
         Region, Country, Postal, Email FROM Employees ORDER BY LastName, FirstName ASC");
     }
-    // Does this work
     public function getToDo($id){
         return $this ->getWithKeyValue("select * from EmployeeToDo", "EmployeeID", $id);
     }
