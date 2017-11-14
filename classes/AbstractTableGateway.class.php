@@ -15,14 +15,7 @@ include('includes/config.php');
 
         // pull the unique identifier for this object
         protected abstract function getKeyName();
-<<<<<<< HEAD
         
-=======
-
-
-       //To pull information using a query from db
-        // 
->>>>>>> be8a3a44195a681d22edd757cd6f0bfb8e21924d
         protected function createAdapter(){
 
             $dbType = "PDO";
