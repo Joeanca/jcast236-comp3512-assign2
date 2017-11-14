@@ -1,4 +1,4 @@
-<?php
+<<?php
 class EmployeesGateway extends AbstractTableGateway {    
     public function __construct()    {
         parent::__construct();   
@@ -34,10 +34,13 @@ class EmployeesGateway extends AbstractTableGateway {
         return $this->getSpecific("select ContactID, FirstName, LastName from Contacts");
     }
     public function getCities(){
-        return $this->getSpecific("Select Distinct City From Employees");
+        return $this->getSpecific("Select Distinct City From Employees ORDER BY City ASC");
     }
     public function citySearch($id){
-        return $this->getWithKeyValue("Select FirstName, LastName FROM Employees", "city", $id);
+        return $this->getWithKeyValue("Select FirstName, LastName, EmployeeID FROM Employees", "city", $id);
+    }
+    public function cityAndLastNameSearch($city,$lastName){
+        return $this->getSpecific("Select FirstName, LastName, EmployeeID FROM Employees WHERE City = '" . $city . "' AND LastName LIKE '" . $lastName . "%'");
     }
 }
 ?>
