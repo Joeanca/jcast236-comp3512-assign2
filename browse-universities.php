@@ -14,8 +14,9 @@ include_once('includes/universityFunctions.inc.php')
     <?php 
         include "includes/importStatements.inc.php"; 
         $universityInstance = new UniversitiesGateway();
-    
+        //include "includes/jscriptFunctions.inc.js";
     ?>
+    <link rel="stylesheet" href="/maps/documentation/javascript/demos/demos.css">
 </head>
 
 <body>
@@ -102,7 +103,7 @@ include_once('includes/universityFunctions.inc.php')
                      
             <div class="mdl-cell mdl-cell--8-col card-lesson mdl-card  mdl-shadow--2dp">
                 <div class="mdl-card__title mdl-color--orange">
-                  <h2 class="mdl-card__title-text">University list</h2>
+                  <h2 class="mdl-card__title-text">University Information</h2>
                 </div>
                         <div class="mdl-card__supporting-text">
                         <!-- Colored raised button -->
@@ -118,6 +119,25 @@ include_once('includes/universityFunctions.inc.php')
                                     <p>$university[Address]<br>
                                     $university[City], $university[State]
                                     $university[Zip]<br><a href='http://$university[Website]'>$university[Website]</a></p>" ;
+                                $long= $university['Longitude'];
+                                $lat= $university['Latitude'];
+                                echo $lat;
+                                echo $long;
+                                echo "<div id='map'></div>";
+                                echo "<script>";
+                                echo        "function initMap() {";
+                                echo            " var uluru = {lat: $lat, lng: $long };";
+                                echo            " var map = new google.maps.Map(document.getElementById('map'), {";
+                                echo            "zoom: 4,";
+                                echo            "center: uluru});";
+                                echo        " var marker = new google.maps.Marker({";
+                                echo        "position: uluru, map: map});";
+                                echo        "}";
+                                echo        "}";
+                                echo        "</script>";
+
+                                echo '<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCseky1QGSaTkBVmSpG7UaIsR46oV6JAOc&callback=initMap"></script>';
+                                
                             }else{
                                 echo "<h4>Select from the University list to display details</h4>";
                             }

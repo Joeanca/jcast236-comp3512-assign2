@@ -35,6 +35,10 @@
     height: 200px;
     width: 200px;
 }
+#map{
+    height: 400px;
+    width: 80%;
+}
 .pull_up{
 
     margin-top: -20px;

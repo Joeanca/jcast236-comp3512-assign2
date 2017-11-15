@@ -22,7 +22,6 @@ class UniversitiesGateway extends AbstractTableGateway {
     }
     
     public function getSpecificUniversities($state){
-        
         return $this->getWithKeyValue("Select Name, Address, City, Zip, Website, UniversityID from Universities ", State, $state);
     }
     
@@ -31,7 +30,7 @@ class UniversitiesGateway extends AbstractTableGateway {
     }
     
     public function getUniversityByUID($uid){
-        return $this->getWithKeyValue("Select Name, Address, City, Zip, Website, UniversityID from Universities ", UniversityID, $uid);
+        return $this->getWithKeyValue("Select Name, Address, City, Zip, Website, UniversityID, Longitude, Latitude from Universities ", UniversityID, $uid);
     }
 }
 ?>
