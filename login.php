@@ -36,9 +36,10 @@
         if ($checkIfExists != ""){
             $userName = $_POST['username'];
             $password = $_POST['password'];
-            $salt = $loginInstance->getSalt($userName);
+            $temp = $loginInstance->getSalt($userName);
+            $salt = $temp[0]['Salt'];
             $object2 = $loginInstance->getPassword($userName);
-            $passwordCheck = $object2[0];
+            $passwordCheck = $object2[0]['Password'];
             $saltyPassword = md5($password.$salt);
             if ($saltyPassword == $passwordCheck){
                 $email = $_POST['username'];
