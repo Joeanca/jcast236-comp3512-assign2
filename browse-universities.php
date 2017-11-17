@@ -113,7 +113,6 @@ include_once('includes/universityFunctions.inc.php')
                            <?php   
                              /* display requested university information */
                             if (!empty($_GET[uid])){
-                                // $university = getNeedle($universities, $_GET[uid], UniversityID );
                                 $university = $universityInstance->getUniversityByUID($_GET[uid])[0];
                                 echo "<h3>$university[Name]</h3>
                                     <p>$university[Address]<br>
@@ -121,16 +120,10 @@ include_once('includes/universityFunctions.inc.php')
                                     $university[Zip]<br><a href='http://$university[Website]'>$university[Website]</a></p>" ;
                                 $long= $university['Longitude'];
                                 $lat= $university['Latitude'];
-                                echo "<div id='map'></div>";
-                                echo "<script>";
-                                echo        "function initMap() {";
-                                echo            " var uluru = {lat: $lat, lng: $long };";
-                                echo            " var map = new google.maps.Map(document.getElementById('map'), {";
-                                echo            "zoom: 14,";
-                                echo            "center: uluru});";
-                                echo        " var marker = new google.maps.Marker({";
-                                echo        "position: uluru, map: map});";
-                                echo        "}";
+                                echo        "<div id='map'></div>";
+                                echo        "<script>";
+                                include     "includes/jscriptFunctions.inc.js";
+                                echo        "setLatLong($lat, $long)";
                                 echo        "</script>";
 
                                 echo '<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCseky1QGSaTkBVmSpG7UaIsR46oV6JAOc&callback=initMap"></script>';
