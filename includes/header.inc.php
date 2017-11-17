@@ -64,7 +64,7 @@
   var LABEL;
   $(function () {
         // var dataSrc = ["32", "austria", "antartica", "argentina", "algeria"];
-         var dataSrc = <?php echo json_encode($employeeArray); ?>;
+        var dataSrc = <?php echo json_encode($employeeArray); ?>;
         $("#fixed-header-drawer-exp").autocomplete({
         source:dataSrc,
         select: function(event, ui) {
