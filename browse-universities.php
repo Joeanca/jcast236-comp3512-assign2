@@ -16,7 +16,7 @@ include_once('includes/universityFunctions.inc.php')
         $universityInstance = new UniversitiesGateway();
         //include "includes/jscriptFunctions.inc.js";
     ?>
-    <link rel="stylesheet" href="/maps/documentation/javascript/demos/demos.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -121,18 +121,15 @@ include_once('includes/universityFunctions.inc.php')
                                     $university[Zip]<br><a href='http://$university[Website]'>$university[Website]</a></p>" ;
                                 $long= $university['Longitude'];
                                 $lat= $university['Latitude'];
-                                echo $lat;
-                                echo $long;
                                 echo "<div id='map'></div>";
                                 echo "<script>";
                                 echo        "function initMap() {";
                                 echo            " var uluru = {lat: $lat, lng: $long };";
                                 echo            " var map = new google.maps.Map(document.getElementById('map'), {";
-                                echo            "zoom: 4,";
+                                echo            "zoom: 14,";
                                 echo            "center: uluru});";
                                 echo        " var marker = new google.maps.Marker({";
                                 echo        "position: uluru, map: map});";
-                                echo        "}";
                                 echo        "}";
                                 echo        "</script>";
 
