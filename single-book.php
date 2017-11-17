@@ -37,7 +37,7 @@ include_once('includes/bookFunctions.inc.php')
         <div class="mdl-grid center">
             
 
-        <div id="overlay" onclick="off()" ><img id="text" class="" src="book-images/medium/<?php echo $book['ISBN10'] ?>.jpg" style="opacity:1.0; height:60%;"/>
+        <div id="overlay" onclick="off()" ><img id="text" class="" src="book-images/large/<?php echo $book['ISBN10'] ?>.jpg" style="opacity:1.0; height:60%;"/>
         </div>
                
         <div class="mdl-cell--6-col  mdl-grid--no-spacing center">
