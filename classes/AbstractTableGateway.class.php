@@ -70,6 +70,7 @@ include('includes/config.php');
             return $toReturn;
             $adapter = null;
         }
+        
         protected function getWithWildCards($sql,$keyArray,$valueArray){
             $adapter = $this->createAdapter();
             for ($i = 0; $i < count($keyArray); $i++){
