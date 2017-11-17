@@ -30,15 +30,16 @@
 <?php
 //If the fields aren't blank, check the database to see if the userName exists
     if(isset($_POST['username']) && isset($_POST['password'])) {
-        $temp=$_POST['username'];
-        $object = $loginInstance->getUserName($temp);
+        $uName =$_POST['username'];
+        $object = $loginInstance->getUserName($uName);
         $checkIfExists = $object[0];
         if ($checkIfExists != ""){
             $userName = $_POST['username'];
             $password = $_POST['password'];
-            $salt = $loginInstance->getSalt($userName);
+            $temp = $loginInstance->getSalt($userName);
+ +          $salt = $temp[0]['Salt'];
             $object2 = $loginInstance->getPassword($userName);
-            $passwordCheck = $object2[0];
+ +          $passwordCheck = $object2[0]['Password'];
             $saltyPassword = md5($password.$salt);
             if ($saltyPassword == $passwordCheck){
                 $email = $_POST['username'];
