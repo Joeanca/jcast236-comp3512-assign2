@@ -60,36 +60,40 @@
     form.submit();
 }
   
-    var searchText = document.getElementById("fixed-header-drawer-exp");
-    var searchString="";
-    searchText.addEventListener("keyup", function(event) {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-        var params =  {search: searchText.value};
-        post('browse-employees.php', params, 'post')
-    }
-    });
-
-  
+  var ID;
+  var LABEL;
   $(function () {
         // var dataSrc = ["32", "austria", "antartica", "argentina", "algeria"];
          var dataSrc = <?php echo json_encode($employeeArray); ?>;
         $("#fixed-header-drawer-exp").autocomplete({
         source:dataSrc,
         select: function(event, ui) {
-            event.preventDefault();
             $("#fixed-header-drawer-exp").val(ui.item.label);
-                location.href = '/browse-employees.php?id=' + ui.item.value;
+            ID = ui.item.value;
+            location.href = '/browse-employees.php?id=' + ui.item.value;
+           return false;
         },
         focus: function(event, ui) {
         event.preventDefault();
-        $("#customer-search").val(ui.item.label);
+        $("#fixed-header-drawer-exp").val(ui.item.label);
         },
-        html: true, // optional (jquery.ui.autocomplete.html.js required)
-         // optional (if other layers overlap autocomplete list)
+        html: true, 
         open: function(event, ui) {
             $(".ui-autocomplete").css("z-index", 1000);
         }
         });
+    });
+    
+    document.getElementById("fixed-header-drawer-exp").addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+            $(".is-upgraded").removeClass("is-focused");
+            if (ID != null){
+                location.href = '/browse-employees.php?id=' + ID;
+            }else{
+                var params =  {search:  $("#fixed-header-drawer-exp").val()};
+                post('browse-employees.php', params, 'post');
+            }
+        }
     });
 </script>
