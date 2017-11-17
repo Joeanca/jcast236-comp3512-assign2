@@ -111,18 +111,21 @@ include_once('includes/universityFunctions.inc.php')
                         <ul class="demo-list-item mdl-list">
                               
                            <?php   
-                             /* display requested university information */
+                             // Display requested university information.
+                             
+                             
                             if (!empty($_GET[uid])){
                                 $university = $universityInstance->getUniversityByUID($_GET[uid])[0];
                                 echo "<h3>$university[Name]</h3>
                                     <p>$university[Address]<br>
                                     $university[City], $university[State]
                                     $university[Zip]<br><a href='http://$university[Website]'>$university[Website]</a></p>" ;
+                                // Set lat & long for requested university. 
                                 $long= $university['Longitude'];
                                 $lat= $university['Latitude'];
-                                echo        "<div id='map'></div>";
-                                echo        "<script>";
-                                include     "includes/jscriptFunctions.inc.js";
+                                echo        "<div id='map'></div><script>";
+                                //   JavaScript (Google Maps API's) to create map.
+                                include     "includes/jscriptMapFunctions.inc.js";
                                 echo        "setLatLong($lat, $long)";
                                 echo        "</script>";
 
