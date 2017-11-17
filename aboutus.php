@@ -25,14 +25,8 @@ include_once('includes/bookFunctions.inc.php');
     
     <main class="mdl-layout__content  mdl-color--grey-50 pull_up">
         <div class="mdl-grid">
-            <div class="card mdl-grid mdl-cell--10-col ">
-                <div class="mdl-card mdl-cell--6-col mdl-grid--no-spacing unified ">
-                    <div class="mdl-cell mdl-cell--12-col  mdl-grid--no-spacing">
-                           <img class ="profile" src="http://www.woori.ca/wp-content/uploads/2016/05/Mount-Royal-University-Logo.png"  border="0"  alt="profile.jpg" style="padding:0px;">  
-
-
-                     </div>   
-                </div>
+            <div class="card mdl-grid mdl-cell--12-col ">
+                
        
                 <div class="mdl-card mdl-cell--6-col mdl-grid--no-spacing unified">
                
@@ -69,6 +63,7 @@ include_once('includes/bookFunctions.inc.php');
                                 <li class='mdl-list__item'>JQuery library found at: <a href="https://jquery.com/"> &nbsphttps://jquery.com/</a></li>
                                 <li class='mdl-list__item'>Icons by Google.</li>
                                 <li class='mdl-list__item'>Stack Overflow for ideas and snippets.</li>
+                                <li class='mdl-list__item'>Google Maps API's.</li>
 
                             </ul>
                         </div>
@@ -77,6 +72,24 @@ include_once('includes/bookFunctions.inc.php');
                     <!--</div>-->
                 </div>
             </div>
+            
+            <!-- "In Association with" Cell containing MRU logo -->
+            <div class="mdl-card mdl-cell--6-col mdl-grid--no-spacing unified ">
+                    <div class="mdl-cell mdl-cell--12-col  mdl-grid--no-spacing double-row">
+                     <div class="mdl-card__title mdl-color--orange">
+                              <h2 class="mdl-card__title-text">In Association With</h2>
+                        </div>
+                        <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                        <div class="mdl-tabs__tab-bar">
+                              <a href="#university-panel" class="mdl-tabs__tab is-active">University</a>
+                        </div>
+                        <div class="mdl-tabs__panel is-active" id="university-panel">
+                           <img class ="profile" src="http://www.theatrealberta.com/wp-content/uploads/2013/04/mru_logo_png.png"  border="0"  alt="profile.jpg" style="padding:15px;">
+                        </div>   
+                        </div>
+                     </div>   
+                </div>
+            </div>    
         </div>
     </main>
  
