@@ -76,12 +76,16 @@ include_once('includes/bookFunctions.inc.php');
                                         foreach($subcategory as $sub){if ($sub[CategoryID]==$c)$subList[]=$sub;};
                                     } 
                                     else $subList=$subcategories;
+                                    $indexSubCat = 0;
                                     foreach ($subcategories as $subcategory){
+                                        if ($indexSubCat < 20){
+                                            $indexSubCat++;
                                     ?>
                                     <li class='mdl-list__item'><?php 
                                         echo constructLink("scat", $subcategory[SubcategoryID], $subcategory[SubcategoryName] ); ?></li>
                                       <?php 
-                                      }
+                                        }
+                                    }
                                  ?>       
                             </ul>
                         </div>
@@ -103,7 +107,10 @@ include_once('includes/bookFunctions.inc.php');
    }
                 $bookList = getBySpecific($bookInstance->getBooks(), $c, $s, $i);
                 //$bookList = getBooks($c,$s,$i);
+                $indexBook = 0;
                 foreach ($bookList as $book){
+                    if ($indexBook < 20){
+                        $indexBook++;
                 ?>
                 
                 <!--The list should contain a thumbnail of the cover, the title, the year, subcategory name, and imprint name.-->
@@ -136,7 +143,7 @@ include_once('includes/bookFunctions.inc.php');
               </div>            
               </div>
                 <?php 
-                ;
+                ;}
                 }
             ?>
             </div>
