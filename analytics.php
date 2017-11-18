@@ -4,6 +4,9 @@
 •A table of the top ten adopted books. This table should contain thumbnail image of book cover, title, and a sum of the Quantity in AdoptionBooks. The title should be a link to the Single Book page with the ISBN as a querystring.I will expect this to be designed in a sensible and attractive way that is consistent with the design of the rest of the site.-->
 <?php
 session_start();
+if(empty($_SESSION['UserID'])){
+    header("Location:/login.php");
+}
 require_once('includes/config.php'); 
 include_once('includes/analytics.inc.php');
 ?>

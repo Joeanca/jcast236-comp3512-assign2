@@ -1,6 +1,9 @@
 <!--There must be a page named aboutus.php. It should have your name, the course name and number, date, and anything else you’d like to put here. Somewhere on this page, provide a list of all resources you are using that you did not create (e.g. MDL, images, etc). Try to make it look nice and make it fit with MDL (or MDC) styles. -->
 <?php
 session_start();
+if(empty($_SESSION['UserID'])){
+    header("Location:/login.php");
+}
 require_once('includes/config.php'); 
 include_once('includes/bookFunctions.inc.php');
 

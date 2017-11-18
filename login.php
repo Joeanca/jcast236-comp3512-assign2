@@ -1,7 +1,10 @@
 
-<?php 
-    
-include "includes/importStatements.inc.php";
+<?php   session_start();
+        if(isset($_SESSION['UserID'])){
+            session_destroy();
+        }
+
+        include "includes/importStatements.inc.php";
         include_once('includes/sessionFunctions.inc.php');
         ?>
 
@@ -45,7 +48,6 @@ include "includes/importStatements.inc.php";
 
     
     if(isset($_POST['username']) && isset($_POST['password'])) {
-        session_start();
         $uName =$_POST['username'];
         $object = $loginInstance->getUserName($uName);
         $checkIfExists = $object[0];

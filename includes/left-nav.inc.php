@@ -20,6 +20,7 @@ $userInfo = $loginInfo->getLeftNav($_SESSION['UserID']);
         <a class="mdl-navigation__link mdl-color-text--blue-grey-300" href="./browse-universities.php"><i class="material-icons" role="presentation">account_balance</i> Universities</a>
         <a class="mdl-navigation__link mdl-color-text--blue-grey-300" href="./analytics.php"><i class="material-icons" role="presentation">assessment</i> Analytics</a>
         <a class="mdl-navigation__link mdl-color-text--blue-grey-300" href="./aboutus.php"><i class="material-icons" role="presentation">announcement</i> About</a>
+        <a class="mdl-navigation__link mdl-color-text--blue-grey-300" href="./login.php"><i class="material-icons" role="presentation">close</i> Logout</a>
                          
     </nav>
   </div>
