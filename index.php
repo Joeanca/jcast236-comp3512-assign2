@@ -3,7 +3,7 @@ The text and links for the images on the home page can be hard-coded.
 This page will contain the following links formatting as MDL (Material Design Lite) Cards: BrowseUniversities, Browse Books, Browse Employees, and About with links to the appropriate pages. 
 It might be nice to make the cards include an image-->
 <?php
-
+session_start();
 $pages = array(array('name' => 'Dashboard','url' => 'index.php','pic' => 'index'), array('name' => 'Employees','url' => 'browse-employees.php','pic' => 'employee'   ),
     array('name' => 'Books','url' => 'browse-books.php','pic' => 'books'), array('name' => 'Universities','url' => 'browse-universities.php','pic' => 'universities'),   array(       'name' => 'Analytics','url' => 'analytics.php',      'pic' => 'universities'
 ),array('name' => 'About','url' => 'aboutus.php','pic' => 'aboutus'));

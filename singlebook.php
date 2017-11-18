@@ -1,7 +1,7 @@
 <!--10.There must be a page named single-book   .ph  p. It should display the details for a single book specified by the ISBN10 value passed in as a query string. This should include a larger version of the cover as well as the following information: ISBN10, ISBN13, Title, CopyrightYear, SubCategory, Imprint, Production Status, Binding Type, Trim Size, Page Count, and Description. Don’t display the foreign keys; display the relevant name. For instance, you wouldn’t want to display the SubcategoryID field value of 16; instead you would want to display its related name (“  Principles of Economics”) from the Subcategory table. This must be accomplished with a single query with multiple inner joins. All of this information should be contained within a single MDL Card element. This page must include two other cards. Each of these will require separate queries. One of these will contain a list of authors for the book, sorted by the Order field. The other card will display a list of universities that have adopted the book.-->
 
 <?php
-
+session_start();
 require_once('includes/config.php'); 
 include_once('includes/bookFunctions.inc.php')
 ?>

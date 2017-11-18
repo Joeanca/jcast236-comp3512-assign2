@@ -4,7 +4,7 @@ Initially, this page must display all the books in the books table. The user sho
 -->
 
 <?php
-
+session_start();
 require_once('includes/config.php'); 
 include_once('includes/bookFunctions.inc.php');
 

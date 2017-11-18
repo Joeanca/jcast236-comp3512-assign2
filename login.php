@@ -1,4 +1,7 @@
-<?php include "includes/importStatements.inc.php";
+
+<?php 
+    
+include "includes/importStatements.inc.php";
         include_once('includes/sessionFunctions.inc.php');
         ?>
 
@@ -40,8 +43,9 @@
 //         }
 //     }
 
-    session_start();
+    
     if(isset($_POST['username']) && isset($_POST['password'])) {
+        session_start();
         $uName =$_POST['username'];
         $object = $loginInstance->getUserName($uName);
         $checkIfExists = $object[0];
@@ -57,11 +61,11 @@
                 $email = $_POST['username'];
                 $firstName = $loginInstance->getFirstName($userName);
                 $lastName = $loginInstance->getLastName($userName);
-                $object = $loginInstance->getUserID($uName);
-                $uID - $object['userID'];
-                setSession($uID);
+                $uID = $loginInstance->getUserID($uName);
+                //setSession($uID);
+                $_SESSION['UserID'] = $uID[0]['UserID'];
                 $previousPage = $_SERVER['HTTP_REFERER'];
-                header("Location:$previousPage");
+                header("Location:/index.php");
             } else {
                 //Echo incorrect password
                 echo "passwords incorrect";

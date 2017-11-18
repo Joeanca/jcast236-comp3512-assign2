@@ -2,7 +2,7 @@
 -->
 
 <?php
-
+session_start();
 require_once('includes/config.php'); 
 include_once('includes/universityFunctions.inc.php')
 ?>

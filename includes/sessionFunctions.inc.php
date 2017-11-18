@@ -7,7 +7,7 @@
     }
     //Closes the session
     function closeSession(){
-        session_destory();
+        session_destroy();
     }
 
 
