@@ -1,30 +1,25 @@
 <?php
-abstract class Session{
     
-    //Start session
-    public function startSession(){
-        session_start();
+    //Start Session
+    function setSession($uID){
+        $_SESSION['user'] = $_POST['username'];
+        $_SESSION['userID'] = $uID;
     }
-    
-    //To be used ONLY ONCE USER VALIDATED
-    public function setSession(){
-        $_SESSION['user']=$_POST['username'];
-    }   
-    
-    //Returns true if session matches credentials, false if not (false value should return user to the login page)
-    public function checkSession(){
-        if($_SESSION['user'] == $_POST['username']){
-            return true;   
-        }
-        else{
-            return false;
-        }
+    //Closes the session
+    function closeSession(){
+        session_destory();
     }
-    
-    //Close session
-    public function closeSession(){
-        session_destroy(); 
-    }
-}
+
+
+//login php
+// session_start():e
+//     if (isset($POST['uname'])) {
+//         if (validateUser($_POST['uname'], $_POST['pwrd'])) {
+//             $_SESSION['user'] = $_POST['uname'];
+//             echo HomeScreen();
+//         } else {
+//             echo LoginFormErrorPage();
+//         }
+//     }
 
 ?>

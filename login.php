@@ -1,5 +1,5 @@
 <?php include "includes/importStatements.inc.php";
-        include_once('includes/loginFunctions.inc.php');
+        include_once('includes/sessionFunctions.inc.php');
         ?>
 
 <!DOCTYPE html>
@@ -29,6 +29,18 @@
 
 <?php
 //If the fields aren't blank, check the database to see if the userName exists
+
+// session_start():
+//     if (isset($POST['uname'])) {
+//         if (validateUser($_POST['uname'], $_POST['pwrd'])) {
+//             $_SESSION['user'] = $_POST['uname'];
+//             echo HomeScreen();
+//         } else {
+//             echo LoginFormErrorPage();
+//         }
+//     }
+
+    session_start();
     if(isset($_POST['username']) && isset($_POST['password'])) {
         $uName =$_POST['username'];
         $object = $loginInstance->getUserName($uName);
@@ -37,19 +49,25 @@
             $userName = $_POST['username'];
             $password = $_POST['password'];
             $temp = $loginInstance->getSalt($userName);
- +          $salt = $temp[0]['Salt'];
+            $salt = $temp[0]['Salt'];
             $object2 = $loginInstance->getPassword($userName);
- +          $passwordCheck = $object2[0]['Password'];
+            $passwordCheck = $object2[0]['Password'];
             $saltyPassword = md5($password.$salt);
             if ($saltyPassword == $passwordCheck){
                 $email = $_POST['username'];
                 $firstName = $loginInstance->getFirstName($userName);
                 $lastName = $loginInstance->getLastName($userName);
-                echo "yayayaya passwords compared";
+                $object = $loginInstance->getUserID($uName);
+                $uID - $object['userID'];
+                setSession($uID);
+                $previousPage = $_SERVER['HTTP_REFERER'];
+                header("Location:$previousPage");
             } else {
+                //Echo incorrect password
                 echo "passwords incorrect";
             }
         } else {
+            //echo incorrect login
             echo "doesn't exist waka waka";
         }
         } 

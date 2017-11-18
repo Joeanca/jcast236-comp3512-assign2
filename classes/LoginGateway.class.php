@@ -1,4 +1,3 @@
-<!--Needs to be just SQL statements-->
 <?php
 class LoginGateway extends AbstractTableGateway {    
     public function __construct()    {
