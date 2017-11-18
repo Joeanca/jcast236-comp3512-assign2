@@ -63,19 +63,23 @@
   var ID;
   var LABEL;
   $(function () {
-        // var dataSrc = ["32", "austria", "antartica", "argentina", "algeria"];
         var dataSrc = <?php echo json_encode($employeeArray); ?>;
         $("#fixed-header-drawer-exp").autocomplete({
-        source:dataSrc,
+        source:function( request, response ) {
+               var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
+             response( $.grep( dataSrc, function( item ){
+                 return matcher.test( item.lastName );
+             }) );
+        },
         select: function(event, ui) {
-            $("#fixed-header-drawer-exp").val(ui.item.label);
+            $("#fixed-header-drawer-exp").val(ui.item.fullName);
             ID = ui.item.value;
             location.href = '/browse-employees.php?id=' + ui.item.value;
            return false;
         },
         focus: function(event, ui) {
         event.preventDefault();
-        $("#fixed-header-drawer-exp").val(ui.item.label);
+        $("#fixed-header-drawer-exp").val(ui.item.fullName);
         },
         html: true, 
         open: function(event, ui) {
