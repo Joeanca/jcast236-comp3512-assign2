@@ -34,7 +34,7 @@ include_once('includes/bookFunctions.inc.php');
     
     <main class="books mdl-layout__content mdl-color--grey-50">
         <div class="mdl-grid">
-            <div class=" mdl-cell mdl-cell--2-col mdl-cell--12-col-phone">
+            <div class=" mdl-cell mdl-cell--3-col mdl-cell--12-col-phone">
                  <div class="mdl-cell mdl-cell--12-col card-lesson mdl-card  mdl-shadow--2dp">
                         <div class="mdl-card__title mdl-color--orange">
                           <h3 class="mdl-card__title-text">Imprints</h3>
@@ -88,7 +88,7 @@ include_once('includes/bookFunctions.inc.php');
                  </div>  <!-- / mdl-cell + mdl-card -->
                 
              </div>
-             <div class="book mdl-cell--10-col mdl-cell--6-col-tablet mdl-cell--12-col-phone content-grid">
+             <div class="book mdl-cell--9-col mdl-cell--6-col-tablet mdl-cell--12-col-phone content-grid">
                  <div class="mdl-grid">
              <?php 
    $c = "";
