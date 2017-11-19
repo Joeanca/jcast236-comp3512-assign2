@@ -48,14 +48,15 @@ include_once('includes/bookFunctions.inc.php');
                                  <!--It should have your name, the course name and number, date, and anything else you’d like to put here.-->
                                  
                                 <li class='mdl-list__item'><h4>COMP 3512 Assignment #2</h4></li>
-                                <li class='mdl-list__item'>This is a hypothetical website created for the assignment</li>
+                                <li class='mdl-list__item'>This is a hypothetical website created for the second assignment for COMP 3512 at Mount Royal University, taught by Randy Connolly</li>
+                                 <li class='mdl-list__item'><a href="https://github.com/Joeanca/jcast236-comp3512-assign2.git">Assignment Github repository</a></li>
                                 <li class='mdl-list__item'>Mount Royal University</li>
                                 <li class='mdl-list__item'>November 18, 2017</li>
-                                <li class='mdl-list__item'>Group work: Initial planning, Gateway classes</li>
-                                <li class='mdl-list__item'>Catie: Login?</li>
-                                <li class='mdl-list__item'>Connor: Browse Employees</li>
-                                <li class='mdl-list__item'>Jorge: Books, Analytics</li>
-                                <li class='mdl-list__item'>Nicole: Browse Universities </li>
+                                <li class='mdl-list__item'>Group work: Initial planning, implementation of class-based infrastructure</li>
+                                <li class='mdl-list__item'>Catie: Login and session persistence </li>
+                                <li class='mdl-list__item'>Connor: Browse Employees, search employees</li>
+                                <li class='mdl-list__item'>Jorge: Books, Analytics, search</li>
+                                <li class='mdl-list__item'>Nicole: Browse Universities, user profile </li>
                             </ul>
                         </div>
                         <div class="mdl-tabs__panel" id="resources-panel">
