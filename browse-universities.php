@@ -14,7 +14,6 @@ include_once('includes/universityFunctions.inc.php')
     <?php 
         include "includes/importStatements.inc.php"; 
         $universityInstance = new UniversitiesGateway();
-        //include "includes/jscriptFunctions.inc.js";
     ?>
     <link rel="stylesheet" href="css/style.css">
 </head>

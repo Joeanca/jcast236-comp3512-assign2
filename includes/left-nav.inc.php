@@ -1,6 +1,6 @@
   <div class="mdl-layout__drawer mdl-color--blue-grey-800 mdl-color-text--blue-grey-50">
        <div class="profile">
-           <img src="images/smiling-owl.jpg" class="avatar" id="profile">
+           <a class='mdl-navigation__link' href="./userProfile.php"><img src="images/smiling-owl.jpg" class="avatar" id="profile"></a>
            <h4>Push it...</h4>           
            <span>PushIt@realGood.ca</span>
        </div>
