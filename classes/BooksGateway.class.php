@@ -23,8 +23,8 @@ class BooksGateway extends AbstractTableGateway {
         return $this->getSpecific("select SubcategoryID, SubcategoryName from Subcategories order by SubcategoryName");
     }
     public function getSingleBook($i10){
-        return $this->getWithKeyValue("SELECT ImprintID, Books.SubcategoryID as sID, BookID, ISBN10, ISBN13, Title, CopyrightYear, TrimSize, PageCountsEditorialEst AS PageCount, Description, STATUS , SubcategoryName, Imprint, BindingType FROM Books
-            JOIN Statuses ON ( Books.ProductionStatusID = Statuses.StatusID ) JOIN Subcategories ON ( Books.SubcategoryID = Subcategories.SubcategoryID ) JOIN Imprints USING ( ImprintID ) JOIN BindingTypes USING  (BindingTypeID)", "ISBN10", $i10);
+        return $this->getWithKeyValue("SELECT ImprintID, Books.SubcategoryID as subID, BookID, ISBN10, ISBN13, Title, CopyrightYear, TrimSize, PageCountsEditorialEst AS PageCount, Description, STATUS , SubcategoryName, Imprint, BindingType FROM Books
+            JOIN Statuses ON ( Books.ProductionStatusID = Statuses.StatusID ) JOIN Subcategories USING (SubcategoryID) JOIN Imprints USING ( ImprintID ) JOIN BindingTypes USING  (BindingTypeID)", "ISBN10", $i10);
     }
     public function getAuthors($bID){
         return $this->getWithKeyValue("SELECT Authors.FirstName as FirstName, Authors.LastName as LastName, Authors.Institution as Institution FROM Books JOIN BookAuthors using (BookID) JOIN Authors using (AuthorID)","BookID",$bID);

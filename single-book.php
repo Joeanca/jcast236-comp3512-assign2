@@ -60,7 +60,7 @@ include_once('includes/bookFunctions.inc.php')
                     <p>ISBN10:&nbsp <?php echo $book[ISBN10]; ?></p>
                     <p>ISBN30:&nbsp <?php echo $book[ISBN13]; ?></p>
                     <p>Copyright Year:&nbsp <?php echo $book[CopyrightYear]; ?></p>
-                    <p>SubCategory:&nbsp <a href="/browse-books.php?scat=<?php echo $book[sID];?>"><?php echo $book[SubcategoryName]; ?></a></p>
+                    <p>SubCategory:&nbsp <a href="/browse-books.php?scat=<?php echo $book[subID];?>"><?php echo $book[SubcategoryName]; ?></a></p>
                     <p>Imprint:&nbsp <a href="/browse-books.php?imp=<?php echo $book[ImprintID];?>"><?php echo $book[Imprint]; ?></a></p>
                     <p>Production Status:&nbsp <?php echo $book[STATUS]; ?></p>
                     <p>Binding Type:&nbsp <?php echo $book[BindingType]; ?></p>
