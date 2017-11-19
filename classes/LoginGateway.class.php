@@ -14,7 +14,6 @@ class LoginGateway extends AbstractTableGateway {
     protected function getKeyName(){
         return "UserName";
     } 
-    
     public function getLoginDetails($userName){
         return $this->getWithKeyValue("SELECT UserID, UserName, FirstName, LastName, Email, Salt, Password FROM UsersLogin JOIN Users using (UserID)", "UserName", $userName);
     }

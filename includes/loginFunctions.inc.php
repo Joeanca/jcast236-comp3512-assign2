@@ -14,10 +14,10 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
             $saltyPassword = md5($password.$salt);
             if ($saltyPassword == $passwordCheck){
                 $email = $_POST['username'];
-                $firstName = $tempUser[FirstName];
-                $lastName = $tempUser[LastName];
-                $uID = $tempUser[UserID];
-                $_SESSION['UserID'] = $uID['UserID'];
+                $firstName = $tempUser['FirstName'];
+                $lastName = $tempUser['LastName'];
+                $uID = $tempUser['UserID'];
+                $_SESSION['UserID'] = $uID;
                 $previousPage = $_SERVER['HTTP_REFERER'];
                 header("Location:/index.php");
             }    else {

@@ -10,7 +10,8 @@
     }if
     ( isset($_SESSION['postdata'])) {
         $_POST = $_SESSION['postdata'];
-    unset($_SESSION['postdata']);
+        unset($_SESSION['postdata']);
+        $_SESSION = array();
     }
 ?>
 <!DOCTYPE html>
