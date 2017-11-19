@@ -1,19 +1,6 @@
 <?php
-    session_start();
-    if( strcasecmp($_SERVER['REQUEST_METHOD'],"POST") === 0) {
-         $_SESSION['postdata'] = $_POST;
-        header("Location: ".$_SERVER['PHP_SELF']."?".$_SERVER['QUERY_STRING']);
-    exit;
-    }
-    if(isset($_SESSION['UserID'])){
-        session_destroy();
-    }if
-    ( isset($_SESSION['postdata'])) {
-        $_POST = $_SESSION['postdata'];
-    unset($_SESSION['postdata']);
-    }
 
-      if(isset($_POST['username']) && isset($_POST['password'])) {
+if(isset($_POST['username']) && isset($_POST['password'])) {
         $uName =$_POST['username'];
         $object = $loginInstance->getUserName($uName);
         $checkIfExists = $object[0];
@@ -27,10 +14,6 @@
             $saltyPassword = md5($password.$salt);
             if ($saltyPassword == $passwordCheck){
                 $email = $_POST['username'];
-                // $firstName = $loginInstance->getFirstName($userName);
-                // $lastName = $loginInstance->getLastName($userName);
-                // $uID = $loginInstance->getUserID($uName);
-                //setSession($uID);
                 $firstName = $tempUser[FirstName];
                 $lastName = $tempUser[LastName];
                 $uID = $tempUser[UserID];
@@ -49,4 +32,4 @@
 
         }
     } 
-    ?>
+ ?>
