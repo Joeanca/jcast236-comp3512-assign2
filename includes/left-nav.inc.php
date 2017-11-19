@@ -8,15 +8,12 @@ $userInfo = $loginInfo->getLeftNav($_SESSION['UserID']);
 
   <div class="mdl-layout__drawer mdl-color--blue-grey-800 mdl-color-text--blue-grey-50">
        <div class="profile">
-<<<<<<< HEAD
            <a class='mdl-navigation__link' href="./userProfile.php"><img src="images/smiling-owl.jpg" class="avatar" id="profile"></a>
            <h4>Push it...</h4>           
            <span>PushIt@realGood.ca</span>
-=======
            <img src="images/smiling-owl.jpg" class="avatar" id="profile">
            <h4><?php echo $userInfo[0]['FirstName'] . ' ' . $userInfo[0]['LastName'];?></h4>           
            <span><?php echo $userInfo[0]['Email'];?></span>
->>>>>>> master
        </div>
 
     <nav class="mdl-navigation mdl-color-text--blue-grey-300">
@@ -27,6 +24,8 @@ $userInfo = $loginInfo->getLeftNav($_SESSION['UserID']);
         <a class="mdl-navigation__link mdl-color-text--blue-grey-300" href="./browse-universities.php"><i class="material-icons" role="presentation">account_balance</i> Universities</a>
         <a class="mdl-navigation__link mdl-color-text--blue-grey-300" href="./analytics.php"><i class="material-icons" role="presentation">assessment</i> Analytics</a>
         <a class="mdl-navigation__link mdl-color-text--blue-grey-300" href="./aboutus.php"><i class="material-icons" role="presentation">announcement</i> About</a>
+        <!--<a class="mdl-navigation__link mdl-color-text--blue-grey-300" href="./login.php"><i class="material-icons" role="presentation">close</i> Logout</a>-->
+                         
     </nav>
   </div>
   

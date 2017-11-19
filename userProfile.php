@@ -22,10 +22,11 @@ include_once('includes/bookFunctions.inc.php');
             
     <?php include 'includes/header.inc.php'; ?>
     <?php include 'includes/left-nav.inc.php'; ?>
+    
     <!-- $uname returns user info if set. Otherwise it returns our group info -->
     <?php 
-        if(isset($_POST['username'])) {
-            $user= $userInstance->getSpecificUser($_POST['username']);
+        if(isset($_SESSION['UserID'])) {
+            $user= $userInstance->getSpecificUser($_SESSION['UserID']);
         }
         else {$user = ['FirstName'=>'Push', 'LastName'=>'It', 'Address'=>'Mount Royal University', 'City'=>'Calgary', 'Region'=>'Alberta', 'Country'=>'Canada', 'Postal'=>'T2W5J9', 'Phone'=>'403-381-2233', 'Email'=>'pushit@pushit.ca'];}
     ?>
