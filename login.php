@@ -14,7 +14,6 @@
     unset($_SESSION['postdata']);
     }
     include "includes/importStatements.inc.php";
-    include_once('includes/sessionFunctions.inc.php');
 ?>
 
 <!DOCTYPE html>
