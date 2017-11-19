@@ -18,9 +18,15 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
                 $lastName = $tempUser[LastName];
                 $uID = $tempUser[UserID];
                 $_SESSION['UserID'] = $uID['UserID'];
-                $previousPage = $_SERVER['HTTP_REFERER'];
-                header("Location:/index.php");
-            }    else {
+                    if(isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] != ""){
+                        $url = $_SERVER['HTTP_REFERER'];
+                    } else {
+                        $url = index.php;
+                    
+                    header("Location:".$url);
+                    }
+                    }
+                    else {
                 //Echo incorrect password
                 $_POST = array();
                 echo "<script> alertify.alert('Oh no!', 'Seems your password is incorrect, please check your credentials and try again!');</script>";

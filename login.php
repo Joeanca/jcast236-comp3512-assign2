@@ -1,8 +1,18 @@
 <?php
+
+
+
  session_start();
     if( strcasecmp($_SERVER['REQUEST_METHOD'],"POST") === 0) {
          $_SESSION['postdata'] = $_POST;
-        header("Location: ".$_SERVER['PHP_SELF']."?".$_SERVER['QUERY_STRING']);
+         $url = $_SESSION['HTTP_REFERER'];
+         if(isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] != ""){
+    $url = $_SERVER['HTTP_REFERER'];
+} else
+{
+    $url = index.php;
+}
+header("Location: ".$url);
     exit;
     }
     if(isset($_SESSION['UserID'])){
