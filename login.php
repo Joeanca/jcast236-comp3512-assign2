@@ -27,6 +27,16 @@
 ?>
         
     </head>
+    <style type="text/css">
+        .highlight {
+    background-color: #FFE0B2;
+}    
+.error {
+    background: #FFCDD2 url(/images/error.png) no-repeat 98% center !important;
+    box-shadow: 0 0 5px #FF5252;
+    /*border-color: #FF1744;    */
+}
+    </style>
     <body>
             <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawe mdl-layout--fixed-header">
     <header class="mdl-layout__header">
@@ -54,12 +64,12 @@
                     
                     <form id="mainForm" action ="/login.php" method="post">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="text" name="username">
-                            <label class="mdl-textfield__label" for="username">Username</label>
+                            <input class="mdl-textfield__input required hilightable" type="text" name="username">
+                            <label class="mdl-textfield__label " for="username">Username</label>
                         </div>
                         
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="password" name="password">
+                            <input class="mdl-textfield__input required hilightable" type="password" name="password">
                             <label class="mdl-textfield__label" for="password">Password</label>
                         </div>
                         
@@ -85,7 +95,46 @@
         </main>
 
         </div>
-        
+<script>
+    window.addEventListener('load', start);
+function start(){
+    var highlights = document.getElementsByClassName("hilightable");
+    for (i=0; i<highlights.length; i++) {
+        highlights[i].addEventListener("focus", function(){
+            this.classList.toggle("hilightable");
+        });
+        highlights[i].addEventListener("blur", function(){
+            if (this.value == '' && this.classList.contains("required")){
+                this.classList.add("error");
+            }else {
+                this.classList.remove("error");
+            }
+            this.classList.toggle("hilightable");
+        }); 
+    }
+    document.getElementById('mainForm').addEventListener("submit", function(e){
+        e.preventDefault();
+        var required = document.getElementsByClassName("required");
+        var ready = false;
+        for (i=0; i<required.length; i++) {
+            if (required[i].value == ""){
+               required[i].classList.add("error");
+               required[i].addEventListener("input", function(){
+                  this.classList.remove("error") ;
+               });
+               ready = false;
+               break;
+            } else {
+                ready = true;
+            }
+        }    
+        if (ready){
+        $(this).unbind('submit').submit();}
+    })
+
+}
+</script>
+
 </body>
     
 </html>
