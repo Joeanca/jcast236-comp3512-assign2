@@ -44,8 +44,7 @@ class LoginGateway extends AbstractTableGateway {
     public function getLeftNav($uID){
         return $this->getWithKeyValue("Select FirstName, LastName, Email FROM Users", "UserID", $uID);
     }
-    
-    }
+}
 
     
     

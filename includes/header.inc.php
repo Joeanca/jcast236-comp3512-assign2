@@ -1,6 +1,7 @@
   <?php 
   $loginInfo = new LoginGateway();
     $userInfo = $loginInfo->getLeftNav($_SESSION['UserID']);
+    
     $startupInstance= new StartupGateway;
     $employeeArray = $startupInstance->getEmployees();
     

@@ -31,10 +31,13 @@ include_once('includes/analytics.inc.php');
     <?php include 'includes/header.inc.php'; ?>
     <?php include 'includes/left-nav.inc.php'; ?>
     <main class="mdl-layout__content mdl-color--grey-50">
+    <div class='mdl-cell mdl-cell--middle mdl-cell--12-col mdl-card__title mdl-color--orange'><h3 class="mdl-card__title-text">Analytics</h3></div>
+
         <section class="page-content">
             <div class="mdl-grid containerBackground">
               <!-- mdl-cell + mdl-card -->
-                    <div class="mdl-grid mdl-cell mdl-cell--3-col mdl-color--purple-300" >
+              
+                    <div class="mdl-grid mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone mdl-color--purple-300" >
                         <div class="mdl-cell--12-col mdl-cell--top mdl-color-text--grey-50" style="height:auto;">Total visits</div>
                             <div class="mdl-cell--12-col">
                                 <div class="mdl-grid mdl-grid--no-spacing">
@@ -53,7 +56,7 @@ include_once('includes/analytics.inc.php');
                             </div>
                         </div>
                     </div>
-                    <div class="mdl-grid mdl-cell mdl-cell--3-col mdl-color--teal-300" >
+                    <div class="mdl-grid mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone mdl-color--teal-300" >
                         <div class="mdl-cell--12-col mdl-cell--top mdl-color-text--grey-50" style="height:auto;">Visiting countries </div>
                             <div class="mdl-cell--12-col">
                                 <div class="mdl-grid mdl-grid--no-spacing">
@@ -73,7 +76,7 @@ include_once('includes/analytics.inc.php');
                         </div>
                     </div>
                     
-                                       <div class="mdl-grid mdl-cell mdl-cell--3-col mdl-color--grey-500" >
+                                       <div class="mdl-grid mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone mdl-color--grey-500" >
                         <div class="mdl-cell--12-col mdl-cell--top mdl-color-text--grey-50" style="height:auto;">To-Dos </div>
                             <div class="mdl-cell--12-col">
                                 <div class="mdl-grid mdl-grid--no-spacing">
@@ -92,7 +95,7 @@ include_once('includes/analytics.inc.php');
                             </div>
                         </div>
                     </div>                    
-                    <div class="mdl-grid mdl-cell mdl-cell--3-col mdl-color--green-A700" >
+                    <div class="mdl-grid mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone mdl-color--green-A700" >
                         <div class="mdl-cell--12-col mdl-cell--top mdl-color-text--grey-50" style="height:auto;">Employee messages sent </div>
                             <div class="mdl-cell--12-col">
                                 <div class="mdl-grid mdl-grid--no-spacing">
@@ -119,7 +122,7 @@ include_once('includes/analytics.inc.php');
                         <div class='mdl-cell mdl-cell--12-col mdl-card__title-text'>Top 15 Visiting Countries</div>
                         <div id="regions_div" style="width: 100%; height: auto;"></div>
                     </div>
-                            <div class='mdl-cell mdl-cell--middle mdl-cell--6-col mdl-cell--hide-desktop mdl-color--teal-300 mdl-color-text--grey-50' style="text-align:center; min-height: 50px; font-size: 1.5em;"><div style="padding-top: 20px;">Top 10 Adopted Books</div></div>
+                            <div class='mdl-cell mdl-cell--middle mdl-cell--12-col mdl-cell--hide-desktop mdl-color--teal-300 mdl-color-text--grey-50' style="text-align:center; min-height: 50px; font-size: 1.5em;"><div style="padding-top: 20px;">Top 10 Adopted Books</div></div>
 
                     <!--<div class="mdl-cell mdl-cell--6-col mdl-cell--top ">-->
                     <!--<div class="mdl-grid mdl-grid--no-spacing">-->
@@ -129,7 +132,7 @@ include_once('includes/analytics.inc.php');
                         ?>
                 <!--The list should contain a thumbnail of the cover, the title, the year, subcategory name, and imprint name.-->
                     <!-- Wide card with share menu button -->
-                 <div class='mdl-cell mdl-cell--3-col mdl-cell--12-col-phone'>
+                 <div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone'>
                   <div class='book-container grow demo-card-square mdl-shadow--2dp card '>
                 <a href="./single-book.php?i10=<?php echo $book['ISBN10']?>">
                 <div class="mdl-card__title img-container" style="padding:0px;">
