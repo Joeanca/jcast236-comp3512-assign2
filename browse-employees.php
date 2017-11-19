@@ -94,7 +94,7 @@ include_once('includes/employeeFunctions.inc.php');
                     <ul class="demo-list-item mdl-list">
                          <?php 
                             if (isset($_POST['search'])){
-                                $employees = $empDB->getByIncompleteName($_POST['search']);
+                                $employees = $empDB->getByLastName($_POST['search']);
                                 usort($employees, function($a, $b) {
                                     if($cmp = strnatcasecmp($a['LastName'], $b['LastName'])) return $cmp;
                                     return strnatcasecmp($a['FirstName'], $b['FirstName']);
