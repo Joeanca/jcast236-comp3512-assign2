@@ -1,5 +1,9 @@
 <!-- User profile. Information -->
 <?php
+session_start();
+if(empty($_SESSION['UserID'])){
+    header("Location:/login.php");
+}
 
 require_once('includes/config.php'); 
 include_once('includes/bookFunctions.inc.php');
