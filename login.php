@@ -1,12 +1,21 @@
 
-<?php   session_start();
-        if(isset($_SESSION['UserID'])){
-            session_destroy();
-        }
-
-        include "includes/importStatements.inc.php";
-        include_once('includes/sessionFunctions.inc.php');
-        ?>
+<?php   
+    session_start();
+    if( strcasecmp($_SERVER['REQUEST_METHOD'],"POST") === 0) {
+         $_SESSION['postdata'] = $_POST;
+        header("Location: ".$_SERVER['PHP_SELF']."?".$_SERVER['QUERY_STRING']);
+    exit;
+    }
+    if(isset($_SESSION['UserID'])){
+        session_destroy();
+    }if
+    ( isset($_SESSION['postdata'])) {
+        $_POST = $_SESSION['postdata'];
+    unset($_SESSION['postdata']);
+    }
+    include "includes/importStatements.inc.php";
+    include_once('includes/sessionFunctions.inc.php');
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,68 +28,52 @@
         
     </head>
     <body>
-        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawe mdl-layout--fixed-header">
-            <header class="mdl-layout__header">
+            <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawe mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
-                <h1 class="mdl-layout-title"><span>CRM</span> Admin</h1>
-            </header>
- 
-            <style>
-                .card-me{
-                    padding-left:25px;
-                    padding-right:25px;
-                    padding-bottom:25px;
-                }
-            </style>
+            <h1 class="mdl-layout-title"><span>CRM</span> Admin</h1>
+    </header>
 
 <?php
-//If the fields aren't blank, check the database to see if the userName exists
-
-// session_start():
-//     if (isset($POST['uname'])) {
-//         if (validateUser($_POST['uname'], $_POST['pwrd'])) {
-//             $_SESSION['user'] = $_POST['uname'];
-//             echo HomeScreen();
-//         } else {
-//             echo LoginFormErrorPage();
-//         }
-//     }
-
-    
     if(isset($_POST['username']) && isset($_POST['password'])) {
         $uName =$_POST['username'];
         $object = $loginInstance->getUserName($uName);
         $checkIfExists = $object[0];
-        if ($checkIfExists != ""){
+        if ($checkIfExists[UserName] != ""){
             $userName = $_POST['username'];
             $password = $_POST['password'];
-            $temp = $loginInstance->getSalt($userName);
-            $salt = $temp[0]['Salt'];
-            $object2 = $loginInstance->getPassword($userName);
-            $passwordCheck = $object2[0]['Password'];
+            $tempUser = $loginInstance->getLoginDetails($userName)[0];
+            $salt = $tempUser['Salt'];
+            // $object2 = $loginInstance->getPassword($userName);
+            $passwordCheck = $tempUser['Password'];
             $saltyPassword = md5($password.$salt);
             if ($saltyPassword == $passwordCheck){
                 $email = $_POST['username'];
-                $firstName = $loginInstance->getFirstName($userName);
-                $lastName = $loginInstance->getLastName($userName);
-                $uID = $loginInstance->getUserID($uName);
+                // $firstName = $loginInstance->getFirstName($userName);
+                // $lastName = $loginInstance->getLastName($userName);
+                // $uID = $loginInstance->getUserID($uName);
                 //setSession($uID);
-                $_SESSION['UserID'] = $uID[0]['UserID'];
+                $firstName = $tempUser[FirstName];
+                $lastName = $tempUser[LastName];
+                $uID = $tempUser[UserID];
+                $_SESSION['UserID'] = $uID['UserID'];
                 $previousPage = $_SERVER['HTTP_REFERER'];
                 header("Location:/index.php");
             } else {
                 //Echo incorrect password
-                echo "passwords incorrect";
+                $_POST = array();
+            echo "<script> alertify.alert('Oh no!', 'Seems your password is incorrect, please check your credentials and try again!');</script>";
             }
         } else {
+            $_POST = array();
             //echo incorrect login
-            echo "doesn't exist waka waka";
+            echo "<script> alertify.alert('Oh no!', 'Seems your credentials are incorrect, please check your login details and try again!');; </script>";
+
         }
         } 
 
 
 ?>
-            
         <main class="mdl-layout__content">
             <div class="page-content">
                 <div class="mdl-grid">
@@ -130,6 +123,6 @@
 
         </div>
         
-    </body>
+</body>
     
 </html>
