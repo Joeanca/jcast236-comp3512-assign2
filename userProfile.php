@@ -2,6 +2,7 @@
 <?php
 session_start();
 if(empty($_SESSION['UserID'])){
+    $_SESSION['url'] = $_SERVER['REQUEST_URI']; 
     header("Location:/login.php");
 }
 

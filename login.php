@@ -1,10 +1,10 @@
 <?php
  session_start();
-    if( strcasecmp($_SERVER['REQUEST_METHOD'],"POST") === 0) {
-         $_SESSION['postdata'] = $_POST;
-        header("Location: ".$_SERVER['PHP_SELF']."?".$_SERVER['QUERY_STRING']);
-    exit;
-    }
+    // if( strcasecmp($_SERVER['REQUEST_METHOD'],"POST") === 0) {
+    //      $_SESSION['postdata'] = $_POST;
+    //     header("Location: ".$_SERVER['PHP_SELF']."?".$_SERVER['QUERY_STRING']);
+    // exit;
+    // }
     if(isset($_SESSION['UserID'])){
         session_destroy();
     }if
@@ -19,6 +19,8 @@
     <head>
         <title>Login</title>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/styles.css" />
+      
 <?php 
     include "includes/importStatements.inc.php"; 
     $loginInstance = new LoginGateway();
@@ -50,7 +52,7 @@
                         <h4 align="center">Login</h4>
                 <div align="center">
                     
-                    <form action ="/login.php" method="post">
+                    <form id="mainForm" action ="/login.php" method="post">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="mdl-textfield__input" type="text" name="username">
                             <label class="mdl-textfield__label" for="username">Username</label>

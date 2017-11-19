@@ -5,6 +5,7 @@ It might be nice to make the cards include an image-->
 <?php
 session_start();
 if(empty($_SESSION['UserID'])){
+    $_SESSION['url'] = $_SERVER['REQUEST_URI']; 
     header("Location:/login.php");
 }
 $pages = array(array('name' => 'Dashboard','url' => 'index.php','pic' => 'index'), array('name' => 'Employees','url' => 'browse-employees.php','pic' => 'employee'   ),

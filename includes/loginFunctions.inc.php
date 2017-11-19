@@ -1,3 +1,5 @@
+
+<link rel="stylesheet" href="css/styles.css" />
 <?php
 
 
@@ -27,7 +29,9 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
                 } else {
                 //Echo incorrect password
                 $_POST = array();
-                echo "<script> alertify.alert('Oh no!', 'Seems your password is incorrect, please check your credentials and try again!');</script>";
+                echo "<script> alertify.alert('Oh no!', 'Seems your password is incorrect, please check your credentials and try again!');
+                document.getElementByID('username').classList.add('error');
+                </script>";
             }
         } else {
             $_POST = array();
