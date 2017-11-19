@@ -1,17 +1,8 @@
 <?php
-
-
-
  session_start();
     if( strcasecmp($_SERVER['REQUEST_METHOD'],"POST") === 0) {
          $_SESSION['postdata'] = $_POST;
-         if(isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] != ""){
-                         $url = $_SERVER['HTTP_REFERER'];
-                     } else {
-                        $url = index.php;
-                    
-                    header("Location:".$url);
-         //header("Location:/index.php");
+        header("Location: ".$_SERVER['PHP_SELF']."?".$_SERVER['QUERY_STRING']);
     exit;
     }
     if(isset($_SESSION['UserID'])){
@@ -19,7 +10,8 @@
     }if
     ( isset($_SESSION['postdata'])) {
         $_POST = $_SESSION['postdata'];
-    unset($_SESSION['postdata']);
+        unset($_SESSION['postdata']);
+        $_SESSION = array();
     }
 ?>
 <!DOCTYPE html>
