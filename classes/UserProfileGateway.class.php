@@ -19,7 +19,7 @@ class UserProfileGateway extends AbstractTableGateway {
     
     //Selects information for user when filtered by a specific email
     public function getSpecificUser($userID){
-        return $this->getWithKeyValue("select UserID, FirstName, LastName, Address, City, Region, Country, Postal, Phone, Email from Users", UserID, $userID);
+        return $this->getWithKeyValue("select UserID, FirstName, LastName, Address, City, Region, Country, Postal, Phone, Email from Users", UserID, $userID)[0];
     }
 }
 ?>

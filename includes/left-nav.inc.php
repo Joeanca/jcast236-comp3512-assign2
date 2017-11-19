@@ -8,10 +8,6 @@ $userInfo = $loginInfo->getLeftNav($_SESSION['UserID']);
 
   <div class="mdl-layout__drawer mdl-color--blue-grey-800 mdl-color-text--blue-grey-50">
        <div class="profile">
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/nwaldy
            <a class='mdl-navigation__link' href="./userProfile.php"><img src="images/smiling-owl.jpg" class="avatar" id="profile"></a>
            <h4><?php echo $userInfo[0]['FirstName'] . ' ' . $userInfo[0]['LastName'];?></h4>           
            <span><?php echo $userInfo[0]['Email'];?></span>
