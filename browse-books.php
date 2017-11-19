@@ -4,7 +4,10 @@ Initially, this page must display all the books in the books table. The user sho
 -->
 
 <?php
-
+session_start();
+if(empty($_SESSION['UserID'])){
+    header("Location:/login.php");
+}
 require_once('includes/config.php'); 
 include_once('includes/bookFunctions.inc.php');
 
@@ -34,7 +37,7 @@ include_once('includes/bookFunctions.inc.php');
     
     <main class="books mdl-layout__content mdl-color--grey-50">
         <div class="mdl-grid">
-            <div class=" mdl-cell mdl-cell--2-col mdl-cell--12-col-phone">
+            <div class=" mdl-cell mdl-cell--3-col mdl-cell--12-col-phone">
                  <div class="mdl-cell mdl-cell--12-col card-lesson mdl-card  mdl-shadow--2dp">
                         <div class="mdl-card__title mdl-color--orange">
                           <h3 class="mdl-card__title-text">Imprints</h3>
@@ -76,19 +79,23 @@ include_once('includes/bookFunctions.inc.php');
                                         foreach($subcategory as $sub){if ($sub[CategoryID]==$c)$subList[]=$sub;};
                                     } 
                                     else $subList=$subcategories;
+                                    $indexSubCat = 0;
                                     foreach ($subcategories as $subcategory){
+                                        if ($indexSubCat < 20){
+                                            $indexSubCat++;
                                     ?>
                                     <li class='mdl-list__item'><?php 
                                         echo constructLink("scat", $subcategory[SubcategoryID], $subcategory[SubcategoryName] ); ?></li>
                                       <?php 
-                                      }
+                                        }
+                                    }
                                  ?>       
                             </ul>
                         </div>
                  </div>  <!-- / mdl-cell + mdl-card -->
                 
              </div>
-             <div class="book mdl-cell--10-col mdl-cell--6-col-tablet mdl-cell--12-col-phone content-grid">
+             <div class="book mdl-cell--9-col mdl-cell--6-col-tablet mdl-cell--12-col-phone content-grid">
                  <div class="mdl-grid">
              <?php 
    $c = "";
@@ -103,7 +110,10 @@ include_once('includes/bookFunctions.inc.php');
    }
                 $bookList = getBySpecific($bookInstance->getBooks(), $c, $s, $i);
                 //$bookList = getBooks($c,$s,$i);
+                $indexBook = 0;
                 foreach ($bookList as $book){
+                    if ($indexBook < 20){
+                        $indexBook++;
                 ?>
                 
                 <!--The list should contain a thumbnail of the cover, the title, the year, subcategory name, and imprint name.-->
@@ -136,7 +146,7 @@ include_once('includes/bookFunctions.inc.php');
               </div>            
               </div>
                 <?php 
-                ;
+                ;}
                 }
             ?>
             </div>

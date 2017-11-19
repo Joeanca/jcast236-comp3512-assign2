@@ -2,7 +2,10 @@
 -->
 
 <?php
-
+session_start();
+if(empty($_SESSION['UserID'])){
+    header("Location:/login.php");
+}
 require_once('includes/config.php'); 
 include_once('includes/universityFunctions.inc.php')
 ?>
@@ -14,8 +17,9 @@ include_once('includes/universityFunctions.inc.php')
     <?php 
         include "includes/importStatements.inc.php"; 
         $universityInstance = new UniversitiesGateway();
-    
+        //include "includes/jscriptFunctions.inc.js";
     ?>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -102,7 +106,7 @@ include_once('includes/universityFunctions.inc.php')
                      
             <div class="mdl-cell mdl-cell--8-col card-lesson mdl-card  mdl-shadow--2dp">
                 <div class="mdl-card__title mdl-color--orange">
-                  <h2 class="mdl-card__title-text">University list</h2>
+                  <h2 class="mdl-card__title-text">University Information</h2>
                 </div>
                         <div class="mdl-card__supporting-text">
                         <!-- Colored raised button -->
@@ -110,14 +114,26 @@ include_once('includes/universityFunctions.inc.php')
                         <ul class="demo-list-item mdl-list">
                               
                            <?php   
-                             /* display requested university information */
+                             // Display requested university information.
+                             
+                             
                             if (!empty($_GET[uid])){
-                                // $university = getNeedle($universities, $_GET[uid], UniversityID );
                                 $university = $universityInstance->getUniversityByUID($_GET[uid])[0];
                                 echo "<h3>$university[Name]</h3>
                                     <p>$university[Address]<br>
                                     $university[City], $university[State]
                                     $university[Zip]<br><a href='http://$university[Website]'>$university[Website]</a></p>" ;
+                                // Set lat & long for requested university. 
+                                $long= $university['Longitude'];
+                                $lat= $university['Latitude'];
+                                echo        "<div id='map'></div><script>";
+                                //   JavaScript (Google Maps API's) to create map.
+                                include     "includes/jscriptMapFunctions.inc.js";
+                                echo        "setLatLong($lat, $long)";
+                                echo        "</script>";
+
+                                echo '<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCseky1QGSaTkBVmSpG7UaIsR46oV6JAOc&callback=initMap"></script>';
+                                
                             }else{
                                 echo "<h4>Select from the University list to display details</h4>";
                             }

@@ -1,5 +1,11 @@
-<?php include "includes/importStatements.inc.php";
-        include_once('includes/loginFunctions.inc.php');
+
+<?php   session_start();
+        if(isset($_SESSION['UserID'])){
+            session_destroy();
+        }
+
+        include "includes/importStatements.inc.php";
+        include_once('includes/sessionFunctions.inc.php');
         ?>
 
 <!DOCTYPE html>
@@ -29,9 +35,21 @@
 
 <?php
 //If the fields aren't blank, check the database to see if the userName exists
+
+// session_start():
+//     if (isset($POST['uname'])) {
+//         if (validateUser($_POST['uname'], $_POST['pwrd'])) {
+//             $_SESSION['user'] = $_POST['uname'];
+//             echo HomeScreen();
+//         } else {
+//             echo LoginFormErrorPage();
+//         }
+//     }
+
+    
     if(isset($_POST['username']) && isset($_POST['password'])) {
-        $temp=$_POST['username'];
-        $object = $loginInstance->getUserName($temp);
+        $uName =$_POST['username'];
+        $object = $loginInstance->getUserName($uName);
         $checkIfExists = $object[0];
         if ($checkIfExists != ""){
             $userName = $_POST['username'];
@@ -45,11 +63,17 @@
                 $email = $_POST['username'];
                 $firstName = $loginInstance->getFirstName($userName);
                 $lastName = $loginInstance->getLastName($userName);
-                echo "yayayaya passwords compared";
+                $uID = $loginInstance->getUserID($uName);
+                //setSession($uID);
+                $_SESSION['UserID'] = $uID[0]['UserID'];
+                $previousPage = $_SERVER['HTTP_REFERER'];
+                header("Location:/index.php");
             } else {
+                //Echo incorrect password
                 echo "passwords incorrect";
             }
         } else {
+            //echo incorrect login
             echo "doesn't exist waka waka";
         }
         } 
