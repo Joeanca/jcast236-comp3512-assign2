@@ -56,7 +56,7 @@ include_once('includes/employeeFunctions.inc.php');
                     </div>
                     <form action ="/browse-employees.php" method="get" id="searchDiv" style="display:none">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" >
-                        <select class="mdl-textfield__input" id="city" name="city">
+                        <select class="mdl-textfield__input" id="city" name="city"><label class="mdl-textfield__input" for="city">City filter</label>
                             <option></option>
                              <?php
                                 $city = $empDB->getCities();
@@ -67,23 +67,24 @@ include_once('includes/employeeFunctions.inc.php');
                                 
                         </select>
                         
-                    <label class="mdl-textfield__label" for="city">City</label>
+                    <label class="mdl-textfield__label" for="city">Search by city</label>
                     </div>
                     
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-                        <label class="mdl-button mdl-js-buttom mdl-button--icon" for="searchName">
-                            <i class="material-icons">search</i>
-                        </label>
-                        <div class="mdl-textfield__expandable-holder">
-                            <input class="mdl-textfield__input" type="text" name=lastname id="searchName"/>
-                            <label class="mdl-textfield__label" for"empSearch">Input Last Name</label>
+                        <!--<label class="mdl-button mdl-js-buttom mdl-button--icon" for="searchName">-->
+                        <!--    <i class="material-icons">search</i>-->
+                        <!--</label>-->
+                        <div class="mdl-textfield  mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="text" name="lastname" id="searchName"/>
+                            <label class="mdl-textfield__label" for"searchName">Search by Last Name</label>
                         </div>
                     </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="submit">Submit</button>
+                    <div class="">
+                        <button class="mdl-button  mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">Search</button>
                     </div>
                     
-                    
+                    <div class="mdl-card__actions mdl-card--border">
+                    </div>
                     </form>
 
                 
