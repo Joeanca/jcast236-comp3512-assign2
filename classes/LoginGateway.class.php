@@ -4,34 +4,50 @@ class LoginGateway extends AbstractTableGateway {
         parent::__construct();   
         
     }       
+    //Gets all the information from the Users table in the db
     protected function getSelectStatement(){
-        return "SELECT UserID, UserName, Password, Salt, State, DateJoined, DateLastModified";
+        return "SELECT UserID, FirstName, LastName, Email FROM Users";
     }    
-    protected function getOrderFields(){}      
-    protected function getKeyName(){} 
+    protected function getOrderFields(){
+        return "UserID";
+    }      
+    protected function getKeyName(){
+        return "UserName";
+    } 
     
-    public function userNameCheck($username){
-       
+    public function getLoginDetails($userName){
+        return $this->getWithKeyValue("SELECT UserID, UserName, FirstName, LastName, Email, Salt, Password FROM UsersLogin JOIN Users using (UserID)", "UserName", $userName);
+    }
+    // //Gets the Salt Value for a specific user
+    // public function getSalt($userName){
+    //     return $this->getWithKeyValue("SELECT Salt FROM UsersLogin", "UserName", $userName);
+    // }
+    // //Gets the password for a specific user
+    // public function getPassword($userName){
+    //     return $this->getWithKeyValue("SELECT Password FROM UsersLogin", "UserName", $userName);
+    // }
+    // public function getUserID($userName){
+    //     return $this->getWithKeyValue("SELECT UserID FROM UsersLogin", "UserName", $userName);
+    // }
+    public function getUserName($userName){
+        return $this->getWithKeyValue("SELECT UserName FROM UsersLogin", "UserName", $userName);
+    }
+    // public function getFirstName($userName){
+    //     return $this->getWithKeyValue("SELECT FirstName FROM Users", "Email", $userName);
+    // }
+    // public function getLastName($userName){
+    //     return $this->getWithKeyValue("SELECT LastName FROM Users", "Email", $userName);
+    // }
+    public function getAll($userName){
+        return $this->getWithKeyValue("SELECT UserID, UserName, Password, Salt FROM UsersLogin", "UserName", $userName);
     }
     
-    public function validate($userName, $password){
-        
-        //K so, first thing you want to do is get the salt from the username that logged in
-        
-        $temp = $this->getWithKeyValue("Select Salt FROM UsersLogin", "UserName", $userName);
-         //I was having issues getting the salt array from the query into a variable but jorge says this shold fix it
-        $salt = $temp[0]['Salt'];
-       
-        //this query will work if the correct salt is selected and that variable isn't empty.
-        //instead of returning, should put in a variable. If variable isn't empty, return true, if empty, return false
-        //Then in previous function you can do the if else. 
-        
-        return $this ->getSpecific("Select UserID FROM UserLogin WHERE UserName = '" . $userName . "' AND Password =MD5( '" . $password . $salt . "')");
+    public function getLeftNav($uID){
+        return $this->getWithKeyValue("Select FirstName, LastName, Email FROM Users", "UserID", $uID);
+    }
+    
+    }
 
-        
-        
-    }
     
-      
-}
+    
 ?>

@@ -1,4 +1,6 @@
   <?php 
+  $loginInfo = new LoginGateway();
+    $userInfo = $loginInfo->getLeftNav($_SESSION['UserID']);
     $startupInstance= new StartupGateway;
     $employeeArray = $startupInstance->getEmployees();
     
@@ -18,7 +20,9 @@
 <div class="mdl-tooltip" for="tt2">Messages</div>                     
                  
 <label id="tt3" class="material-icons mdl-badge mdl-badge--overlap" data-badge="4">notifications</label> 
- <div class="mdl-tooltip" for="tt3">Notifications</div>           
+ <div class="mdl-tooltip" for="tt3">Notifications</div>
+ <label id="tt4" class="material-icons mdl-badge mdl-badge--overlap"><a href="./login.php" style="text-decoration:none; color:white">close</a></label> 
+ <div class="mdl-tooltip" for="tt4">Logout</div>
                   
         <label class="mdl-button mdl-js-button mdl-button--icon"
                for="fixed-header-drawer-exp">
@@ -60,36 +64,44 @@
     form.submit();
 }
   
-    var searchText = document.getElementById("fixed-header-drawer-exp");
-    var searchString="";
-    searchText.addEventListener("keyup", function(event) {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-        var params =  {search: searchText.value};
-        post('browse-employees.php', params, 'post')
-    }
-    });
-
-  
+  var ID;
+  var LABEL;
   $(function () {
-        // var dataSrc = ["32", "austria", "antartica", "argentina", "algeria"];
-         var dataSrc = <?php echo json_encode($employeeArray); ?>;
+        var dataSrc = <?php echo json_encode($employeeArray); ?>;
         $("#fixed-header-drawer-exp").autocomplete({
-        source:dataSrc,
+        source:function( request, response ) {
+               var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
+             response( $.grep( dataSrc, function( item ){
+                 return matcher.test( item.lastName );
+             }) );
+        },
         select: function(event, ui) {
-            event.preventDefault();
-            $("#fixed-header-drawer-exp").val(ui.item.label);
-                location.href = '/browse-employees.php?id=' + ui.item.value;
+            $("#fixed-header-drawer-exp").val(ui.item.fullName);
+            ID = ui.item.value;
+            location.href = '/browse-employees.php?id=' + ui.item.value;
+           return false;
         },
         focus: function(event, ui) {
         event.preventDefault();
-        $("#customer-search").val(ui.item.label);
+        $("#fixed-header-drawer-exp").val(ui.item.fullName);
         },
-        html: true, // optional (jquery.ui.autocomplete.html.js required)
-         // optional (if other layers overlap autocomplete list)
+        html: true, 
         open: function(event, ui) {
             $(".ui-autocomplete").css("z-index", 1000);
         }
         });
+    });
+    
+    document.getElementById("fixed-header-drawer-exp").addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+            $(".is-upgraded").removeClass("is-focused");
+            if (ID != null){
+                location.href = '/browse-employees.php?id=' + ID;
+            }else{
+                var params =  {search:  $("#fixed-header-drawer-exp").val()};
+                post('browse-employees.php', params, 'post');
+            }
+        }
     });
 </script>

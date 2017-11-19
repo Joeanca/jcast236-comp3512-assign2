@@ -10,7 +10,7 @@ class StartupGateway extends AbstractTableGateway {
     protected function getOrderFields(){}      
     protected function getKeyName(){} 
     public function getEmployees(){
-        return $this->getSpecific("SELECT EmployeeID as value, CONCAT(FirstName, ' ', LastName) As label FROM Employees");
+        return $this->getSpecific("SELECT EmployeeID as value, CONCAT(FirstName, ' ', LastName) As label, LastName as lastName FROM Employees");
     }
 }
 ?>

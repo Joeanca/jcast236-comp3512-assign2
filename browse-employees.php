@@ -1,6 +1,12 @@
 <?php
+session_start();
+if(empty($_SESSION['UserID'])){
+    header("Location:/login.php");
+}
+
 require_once('includes/config.php'); 
 include_once('includes/employeeFunctions.inc.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -92,7 +98,8 @@ include_once('includes/employeeFunctions.inc.php');
                                     if($cmp = strnatcasecmp($a['LastName'], $b['LastName'])) return $cmp;
                                     return strnatcasecmp($a['FirstName'], $b['FirstName']);
                                 });
-                            }else{    
+                            }
+                            else{    
                                if(isset($_GET['city']) && empty($_GET['lastname'])){
                                     $id=$_GET['city'];
                                     $employees=$empDB->citySearch($id);
